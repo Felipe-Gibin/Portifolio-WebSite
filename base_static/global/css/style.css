@@ -1,0 +1,51 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 50vh;
+    min-height: 100vh;
+    align-items: center;
+    color: white;
+}
+
+main {
+    flex: 1;
+    color: black;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    background-color: purple;
+    min-height: 6vh;
+    font-size: 20px;
+    width: 100%;
+}
+
+footer {
+    font-size: 6px;
+    justify-items: center;
+    min-height: 2vh;
+    background-color: purple;
+    width: 100%;
+}
+
+.nav-header {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    font-weight: bold;
+}
+
+.nav-header a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+
+.nav-header a:hover {
+    background-color: blue;
+}
