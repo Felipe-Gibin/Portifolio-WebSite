@@ -1,7 +1,15 @@
-body, html {
+body, html, main {
     margin: 0;
     padding: 0;
 }
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+footer header nav{
+    display: block;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -13,6 +21,11 @@ body {
 
 main {
     flex: 1;
+    width: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
     color: black;
 }
 
@@ -48,4 +61,32 @@ footer {
 
 .nav-header a:hover {
     background-color: blue;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: aqua;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+}
+
+.column {
+    display: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    background-color: blueviolet;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.card {
+    background-color: black;
+    size: 10px;
+    margin: 5px;
+}
+
+.a0 {
+    justify-items: center;
 }
