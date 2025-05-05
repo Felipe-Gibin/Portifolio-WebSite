@@ -2,21 +2,49 @@
 
 
 {% block content %}
-    <div class='row'>
-        <div class='column'>
-            {% for project in projects %}
-                
-            <div class= 'card'>
-                <h1>{{ project.project_name }}</h1>
-                
-                <ul class='card-tags'>
-                    {% for tag in project.tags.all %}
-                    <li>{{ tag.tag_name }}</li>     
+    <div class='container-2'>
+        <h1>Projetos</h1>
+        <details>
+            <summary class='tag-filter'>Filtro</summary>
+            <form method="get">
+              <select name="tag">
+                <option value="">--------</option>
+                {% for tag in tags.all %}
+                <option value="{{ tag.slug }}">{{ tag.name }}</option>
+                {% endfor %}
+              </select>
+              <button type="submit">Filtrar</button>
+            </form>
+        </details>
+        
+        {% comment %}
+        Tentativa de estilizar o filtro
+        
+        <div class='custom-dropdown' >
+            <div class='custom-summary' tabindex="0">
+                <ul class='custom-option'>
+                    {% for tag in tags.all %}
+                    <li>{{ tag.tag_name }}</li>
                     {% endfor %}
                 </ul>
             </div>
-            {% endfor %}  
         </div>
+        {% endcomment %}
+        
+    </div>
+
+    <div class='card-container'>
+        {% for project in projects %}
+        <div class= 'card-item'>
+            <h1>{{ project.name }}</h1>
+                
+            <ul class='card-tags'>
+                {% for tag in project.tags.all %}
+                <li>{{ tag.name }}</li>     
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}  
     </div>    
 
 

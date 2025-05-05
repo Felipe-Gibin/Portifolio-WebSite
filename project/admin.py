@@ -14,11 +14,11 @@ class ProjectFormAdmin(forms.ModelForm):
 
 @admin.register(models.Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('id', 'project_name', 'created_at', 'updated_at')
-    list_display_links = ('id', 'project_name')
+    list_display = ('id', 'name', 'created_at', 'updated_at')
+    list_display_links = ('id', 'name')
     form = ProjectFormAdmin
     
 @admin.register(models.Tags)
 class TagsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'tag_name', 'updated_at')
-    list_display_links = ('id', 'tag_name')
+    list_display = ('id', 'name','created_at', 'updated_at')
+    list_display_links = ('id', 'name')

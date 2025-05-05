@@ -1,51 +1,74 @@
-body, html, main {
+/* Variáveis */
+:root {
+    --smallest-font: 0.4rem;
+    --smaller-font: 0.6rem;
+    --small-font: 0.8rem;
+    --medium-font: 1rem;
+    --big-font: 1.2rem;
+    --bigger-font: 1.4rem;
+    --biggest-font: 1.8rem;
+    --bigbig-font: 2.6rem;
+}
+
+/* Correçção das margens */
+body, html, main, h1, h2, h3, h4, h5, h6, p, a, ul, l1 {
     margin: 0;
     padding: 0;
 }
+
+/* Definição do tamanho da fonte */
 html {
-    -webkit-text-size-adjust: 100%;
+    font-size: 62.5%;
 }
 
-footer header nav{
-    display: block;
-}
-
+/* Corpo Principal */
 body {
     display: flex;
     flex-direction: column;
-    min-width: 50vh;
-    min-height: 100vh;
     align-items: center;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
     color: white;
 }
 
+/* Corpo do conteúdo */
 main {
     flex: 1;
-    width: 100vh;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    width: 100%;
+    margin: 0 auto;
     color: black;
 }
 
+/* Centralizar texto principal */
+.title-main {
+    justify-items: center;
+    font-size: var(--biggest-font);
+}
+
+/* Cabeçalho */
 header {
     display: flex;
     flex-direction: row;
     background-color: purple;
-    min-height: 6vh;
-    font-size: 20px;
     width: 100%;
 }
+header ul {
+    margin: 10px;
+    padding: 10px;
+    font-size: var(--bigger-font);
+}
 
+/* Rodapé */
 footer {
-    font-size: 6px;
+    font-size: var(--smaller-font);
     justify-items: center;
-    min-height: 2vh;
     background-color: purple;
     width: 100%;
+    padding: 10px;
 }
 
+/* Navegação cabeçalho */
 .nav-header {
     display: flex;
     flex-direction: row;
@@ -53,40 +76,88 @@ footer {
     font-weight: bold;
 }
 
+/* Link's cabeçalho */
 .nav-header a {
     text-decoration: none;
     color: white;
     padding: 10px;
 }
 
+/* Link's cabeçalho ao passar o mouse*/
 .nav-header a:hover {
     background-color: blue;
 }
 
-.row {
+/* Container do titulo de projetos */
+.container-2 {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    font-size: var(--bigbig-font);
+    min-height: 10vh;
+    margin: 40px auto;
+    padding: 30px;
+    
+}
+
+/* Filtro dos projetos, colapsável */
+.container-2 details {
+    position: absolute;
+    font-size: var(--biggest-font);
+    left: 60%;
+    top: 47%;
+    cursor:pointer;
+    z-index: 1;
+}
+
+/* Container principal dos cards de projetos */
+.card-container {
     display: flex;
     flex-wrap: wrap;
-    background-color: aqua;
-    margin-left: 10px;
-    margin-right: 10px;
+    background-color: pink;
     color: white;
+    width: 80%;
+    margin: 0 auto;
+    gap: 30px;
+    padding: 30px;
 }
 
-.column {
-    display: relative;
-    flex: 0 0 100%;
-    width: 100%;
-    background-color: blueviolet;
-    padding-left: 40px;
-    padding-right: 40px;
+/* Container do card em si */
+.card-item{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 calc(20% - 30px);
+    height: 200px;
+    align-items: center;
+    background-color: red;
+    outline: 2px solid black;
+}
+/* Telas médias: 3 cards por linha */
+@media (max-width: 1000px) {
+    .card-item {
+        flex: 0 0 calc(33.33% - 30px);
+        }
+    }
+/* Telas pequenas: 2 cards por linha */
+@media (max-width: 700px) {
+    .card-item {
+        flex: 0 0 calc(50% - 30px);
+        width: 100%;
+        }
+    }
+/* Telas muito pequenas: 1 card por linha */
+@media (max-width: 500px) {
+    .card-item {
+        flex: 0 0 100%;
+        }
+    }
+
+/* Config das tags dos cards */
+.card-tags {
+    background-color: green;
+    list-style-type: none;
 }
 
-.card {
-    background-color: black;
-    size: 10px;
-    margin: 5px;
-}
 
-.a0 {
-    justify-items: center;
-}

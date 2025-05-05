@@ -5,5 +5,6 @@ app_name = 'project'
 
 urlpatterns = [
     path('', views.ProjectList.as_view(), name='projectList'),
+    path('<slug:slug>/', views.ProjectList.as_view(), name='projectListFiltered'),
     path('detalhe/', views.ProjectItem.as_view(), name='projectDetail'),
 ]
