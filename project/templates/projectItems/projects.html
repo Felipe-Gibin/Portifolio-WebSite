@@ -2,8 +2,21 @@
 
 
 {% block content %}
-<div>
-    <h1>Projects</h1>
+<div class='detail-project'>
+    <div>
+        <h1>Project name: {{ project.name }}</h1>
+        <h1>Descrição curta: </h1>
+        <p>{{ project.short_desc }}</p>
+        <h1>Tags: </h1>
+        <ul>
+        {% for tag in project.tags.all %}
+            <li>{{ tag.name }}</li>
+        {% endfor %}
+        </ul>        
+        <h1>Descrição Longa: </h1>
+        <p>{{ project.long_desc }}</p>
+        <h1>Created at: {{ project.created_at }} </h1>
+        <h1>Updated at: {{ project.updated_at }} </h1>
+    </div>
 </div>
-
 {% endblock content %}
