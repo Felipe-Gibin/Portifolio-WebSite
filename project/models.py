@@ -15,9 +15,40 @@ class Project(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     short_desc = models.TextField(max_length=400)
     long_desc= models.TextField(null=True, blank=True)
+    img_icon = models.ImageField(upload_to='project_icon/%Y-%m/', null=True, blank=True)
     tags = models.ManyToManyField('Tags', default='', blank=True)
     created_at = models.DateTimeField(auto_now_add=False)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    
+    def process_img_p(self) -> None:
+        """
+        Processa a imagem de icone do Projeto
+        Ajustando o tamanho
+        Alterando o formato para .png, caso necessário
+        Alterando o nome para o nome do projeto
+        """
+        
+        # Abre a imagem
+        # NOTE: Caso falha na imagem (projeto)
+        # '.file' para uso normal
+        # '.path' para injeção de dados
+        img = Image.open(self.img_icon.path)
+        
+        # Cria o caminho para a nova imagem
+        sub_dir = now().strftime("project_icon/%Y-%m/")
+        new_img_file_name = f'{self.name}.{img.format}'
+        new_img_path = os.path.join(settings.MEDIA_ROOT, sub_dir, new_img_file_name)
+        
+        # Garante que o diretório existe
+        os.makedirs(os.path.dirname(new_img_path), exist_ok=True)
+        
+        new_img = resize_image_square(img, 160)
+        new_img.save(new_img_path, quality=80)
+        with open(new_img_path, 'rb') as f:
+            img_file = File(f)
+            file_name = f'{self.name}-formated.png'
+            self.img_icon.save(file_name, img_file, save=False)
+        os.remove(new_img_path)
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -28,6 +59,10 @@ class Project(models.Model):
                 slug = f'{base_slug}-{count}'
                 count += 1
             self.slug = slug
+        
+        if self.img_icon:
+            self.process_img_p()
+            
         super().save(*args, **kwargs)
     
     def __str__(self) -> str:
@@ -41,12 +76,13 @@ class Tags(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     desc_short = models.TextField(max_length=200)
     desc_long = models.TextField(null=True, blank=True)
-    img_icon = models.ImageField(upload_to='tag_icon/%Y-%m/', blank=True, null = True)
+    img_icon = models.ImageField(upload_to='tag_icon/%Y-%m/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=False)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     
-    
-    def process_img(self, image: ImageFile|None = None) -> None:
+    # FIXME: Retificar func
+    # Criar Func unica para uso em ambos os modelos
+    def process_img(self) -> None:
         """
         Processa a imagem da tag
         Removendo fundo branco
@@ -56,6 +92,9 @@ class Tags(models.Model):
         """
         
         # Abre a imagem
+        # NOTE: Caso falha na imagem (tag)
+        # '.file' para uso normal
+        # '.path' para injeção de dados
         img = Image.open(self.img_icon.path)
         
         # Cria o caminho para a nova imagem

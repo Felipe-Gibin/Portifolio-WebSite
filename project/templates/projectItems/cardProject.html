@@ -45,7 +45,13 @@
         <div class= 'card-item'>
             <a href="{% url 'project:projectDetail' slug=project.slug%}" class="select-project"></a>
             <h1>{{ project.name }}</h1>
-            <div class='img-card'></div>
+            
+            {% if project.img_icon %}
+            <img class="img-card" src="{{ project.img_icon.url }}" alt="project.name">
+            {% else %}
+            <div class='img-card'></div>    
+            {% endif %}
+                
             <div class='card-tags'>
                 <ul>
                     {% for tag in custom_tags_list|get_item:project.pk %}
@@ -61,6 +67,23 @@
             </div>
         </div>
         {% endfor %}  
+    </div>
+
+    <div class='paginator'>
+        
+        {% if page_obj.has_previous %}
+        <a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">Primeira</a>
+        <a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Anterior</a>
+        {% endif %}
+
+        <span>
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+        
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Próxima</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">Última</a>
+        {% endif %}
     </div>
     
 

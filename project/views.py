@@ -15,6 +15,8 @@ class ProjectList(ListView):
     template_name = 'projectItems/cardProject.html'
     model = Project
     context_object_name = 'projects'
+    paginate_by = 15
+    ordering = ['-id']
     
     def get_queryset(self):
         tag_slug = self.request.GET.get('tag')
@@ -30,6 +32,10 @@ class ProjectList(ListView):
         filter_tag = self.request.GET.get('tag')
         context["tags"] = Tags.objects.all()
         context["filter_tag"] = filter_tag
+        
+        querydict = self.request.GET.copy()
+        querydict.pop('page', None)
+        context['querystring'] = querydict.urlencode()
         
         custom_tags_list = {}
         

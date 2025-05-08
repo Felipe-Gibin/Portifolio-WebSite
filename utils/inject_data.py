@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 from datetime import datetime
 from pprint import pprint
-from random import randint, sample
+from random import randint, sample, choice
 import django
 from django.core.files import File
 from django.conf import settings
@@ -24,6 +24,8 @@ if __name__ == '__main__':
     Apagará todo o banco de dados
     e injetará dados
     '''
+    
+    
     print('\n' * 10)
     print('--------------INICIANDO--------------')
     import faker
@@ -52,6 +54,8 @@ if __name__ == '__main__':
         {"name": "MongoDB", "img_path": 'mongodb.png'},
         {"name": "Docker", "img_path": 'docker.png'},
     ]
+    proj_icons = [f'P{i}.png'for i in range(1,8)]
+    
     n = len(tag_data)
     django_tags = []
     
@@ -69,6 +73,7 @@ if __name__ == '__main__':
             )
 
         # Abre o arquivo de imagem e associa
+        
         img_path = str(IMG_PATHS / tag_data[i]["img_path"])
         with open(img_path, 'rb') as f:
             tag.img_icon.save(tag_data[i]["img_path"], File(f), save=False)  
@@ -95,6 +100,11 @@ if __name__ == '__main__':
                 created_at=created_date,
                 updated_at='',
             )
+        # Abre o arquivo de imagem e associa
+        r_file_name = choice(proj_icons)
+        img_path = str(IMG_PATHS / r_file_name)
+        with open(img_path, 'rb') as f:
+            project.img_icon.save(r_file_name, File(f), save=False)
         project.save()
         project.tags.set(selected_tags)
         django_projects.append(project)

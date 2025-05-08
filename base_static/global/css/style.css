@@ -189,10 +189,9 @@ footer {
 
 /* Config das imagens dos cards */
 .img-card {
-    background-color: blue;
     margin: auto;
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
 }
 
 /* Config das tags dos cards */
@@ -216,6 +215,21 @@ footer {
 .card-tags ul img{
     position: relative;
     z-index: 9;
+}
+
+/* Config paginação */
+.paginator {
+    font-size: var(--bigger-font);
+    width: 80%;
+    margin: 10px auto;
+    padding: 20px;
+    text-align: right;
+}
+
+/* Config links da paginação */
+.paginator a{
+    text-decoration: none;
+    color: blue;
 }
 
 /* Detalhe de cada projeto */
