@@ -17,13 +17,11 @@ class ProjectList(ListView):
     context_object_name = 'projects'
     
     def get_queryset(self):
-        
         tag_slug = self.request.GET.get('tag')
         queryset = super().get_queryset()
         if tag_slug:
             tag = get_object_or_404(Tags, slug=tag_slug)
             queryset = queryset.filter(tags=tag)
-            
         return queryset
     
         

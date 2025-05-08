@@ -5,6 +5,7 @@ from datetime import datetime
 from pprint import pprint
 from random import randint, sample
 import django
+from django.core.files import File
 from django.conf import settings
 
 DJANGO_BASE_DIR = Path(__file__).parent.parent
@@ -26,10 +27,10 @@ if __name__ == '__main__':
     print('\n' * 10)
     print('--------------INICIANDO--------------')
     import faker
-    
     from project.models import Project, Tags
-    
     start = datetime.now()
+    
+    IMG_PATHS = DJANGO_BASE_DIR / 'media' / 'icons_for_injection'
     
     print('Apagando DB')
     Project.objects.all().delete()
@@ -37,24 +38,40 @@ if __name__ == '__main__':
     
     fake = faker.Faker('pt-BR')
     possible_tags = ['Django', 'Python', 'Pandas', 'Jupiter', 'NETBeans', 'React', 'HTML', 'CSS', 'JS', 'Java', 'MongoDB', 'Docker']
-    n = len(possible_tags)
-    tags = sample(possible_tags, n) if NUMBER_OF_TAGS >= n else sample(possible_tags, NUMBER_OF_TAGS)
-    
+    tag_data = [
+        {"name": "Django", "img_path": 'django.jpeg'},
+        {"name": "Python", "img_path": 'python.jpeg'},
+        {"name": "css", "img_path": 'css.png'},
+        {"name": "Pandas", "img_path": 'pandas.png'},
+        {"name": "Jupyter", "img_path": 'jupyter.png'},
+        {"name": "NETBeans", "img_path": 'netbeans.png'},
+        {"name": "React", "img_path": 'react.png'},
+        {"name": "HTML", "img_path": 'html.png'},
+        {"name": "JS", "img_path": 'javascript.png'},
+        {"name": "Java", "img_path": 'java.png'},
+        {"name": "MongoDB", "img_path": 'mongodb.png'},
+        {"name": "Docker", "img_path": 'docker.png'},
+    ]
+    n = len(tag_data)
     django_tags = []
     
-    for i in tags:
+    for i in range(n):
         desc_short = fake.text(max_nb_chars=200)
         desc_long = fake.text(max_nb_chars=randint(300, 800))
         created_date: datetime = fake.date_this_year() # type: ignore
         
         tag = Tags(
-                name=i,
+                name=tag_data[i]['name'],
                 desc_short=desc_short,
                 desc_long=desc_long,
                 created_at=created_date,
                 updated_at='',
             )
-        
+
+        # Abre o arquivo de imagem e associa
+        img_path = str(IMG_PATHS / tag_data[i]["img_path"])
+        with open(img_path, 'rb') as f:
+            tag.img_icon.save(tag_data[i]["img_path"], File(f), save=False)  
         tag.save()
         django_tags.append(tag)
         

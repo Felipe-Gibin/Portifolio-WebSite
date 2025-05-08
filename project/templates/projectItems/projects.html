@@ -10,7 +10,8 @@
         <h1>Tags: </h1>
         <ul>
         {% for tag in project.tags.all %}
-            <li>{{ tag.name }}</li>
+            <li><img src="{{ tag.img_icon.url }}" alt="{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}
+            </li>
         {% endfor %}
         </ul>        
         <h1>Descrição Longa: </h1>
