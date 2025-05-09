@@ -1,0 +1,16 @@
+{% extends "global/base.html" %}
+
+
+{% block content %}
+    <div>
+        <h1>LOGIN SUCCES</h1>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'my_admin:logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% endif %}
+    </div>    
+
+
+{% endblock content %}

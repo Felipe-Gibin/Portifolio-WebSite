@@ -24,6 +24,7 @@ app_name='main'
 urlpatterns = [
     path('', include('mainSite.urls')),
     path('projects/', include('project.urls')),
+    path('my-admin/', include(('my_admin.urls', 'my_admin'), namespace='my_admin')),
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
