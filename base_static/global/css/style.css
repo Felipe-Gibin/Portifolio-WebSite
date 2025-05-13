@@ -1,13 +1,12 @@
 /* Variáveis */
 :root {
-    --smallest-font: 0.4rem;
+    --smallest-font: 0.2rem;
     --smaller-font: 0.6rem;
     --small-font: 0.8rem;
-    --medium-font: 1rem;
-    --big-font: 1.2rem;
-    --bigger-font: 1.4rem;
-    --biggest-font: 1.8rem;
-    --bigbig-font: 2.6rem;
+    --medium-font: 1.4rem;
+    --big-font: 1.8rem;
+    --bigger-font: 2.0rem;
+    --biggest-font: 2.4rem;
 }
 
 
@@ -45,10 +44,8 @@ main {
     width: 100%;
     height: calc(100vh - 25px);
     margin: 0 auto;
-    
     color: black;
     overflow: hidden;
-    background-color: lightblue;
 }
 
 /* Centralizar texto principal */
@@ -111,7 +108,7 @@ footer {
     align-items: center;
     justify-content: center;
     width: 80%;
-    font-size: var(--bigbig-font);
+    font-size: var(--biggest-font);
     min-height: 10vh;
     margin: 40px auto;
     padding: 30px;
@@ -259,11 +256,11 @@ footer {
     flex-direction: column;
 }
 .detail-project h1 {
-    font-size: var(--bigbig-font);
+    font-size: var(--biggest-font);
     padding: 10px;
 }
 .detail-project p {
-    font-size: var(--bigger-font);
+    font-size: var(--biggest-font);
     padding: 10px;
 }
 
@@ -277,7 +274,7 @@ footer {
     align-items: center;
     height: 100%;
     overflow: hidden;
-    background-color: aqua;
+
 }
 
 .login-wraper {
@@ -285,13 +282,44 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: brown;
     padding: 15px;
     margin: 10px;
 }
 
 .container-login {
-    background-color: magenta;
+    background-color: rgba(97, 12, 112, 0.2);
     padding: 20px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 400px;
+    gap: 20px;
+    font-size: var(--bigger-font);
+}
+
+.container-login h1 {
+    margin-bottom: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    background: transparent;
+}
+
+.form-control::placeholder {
+    font-style: italic;
+    color: rgba(100, 100, 100, 0.3);
 }

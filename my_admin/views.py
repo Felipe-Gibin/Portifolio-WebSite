@@ -4,11 +4,12 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
+from .forms import CustomLoginForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class MyAdminLogin(FormView):
     template_name = 'my_admin/login.html'
-    form_class = AuthenticationForm
+    form_class = CustomLoginForm
     success_url = reverse_lazy('my_admin:login_success')
     
     def form_valid(self, form):
