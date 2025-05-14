@@ -265,7 +265,7 @@ footer {
 }
 
 /* -------------------------------------------------------------------------- */
-/* login */
+/* Login */
 .login-container-wraper {
     flex: 1;
     display: flex;
@@ -280,6 +280,7 @@ footer {
 .login-wraper {
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 15px;
@@ -304,11 +305,25 @@ footer {
     margin-bottom: 10px;
 }
 
+.container-login button {
+    width: 110%;
+    background-color: rgba(97, 12, 112, 0.3);
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.container-login button:hover{
+    background-color: rgba(97, 12, 112, 0.4);
+    scale: 1.02;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
     margin: 5px;
 }
+
 
 .form-control {
     width: 100%;
@@ -323,3 +338,68 @@ footer {
     font-style: italic;
     color: rgba(100, 100, 100, 0.3);
 }
+
+.error {
+    display: flex;
+    width: 15%;
+    list-style: none;
+    justify-content: center;
+    margin: 5px;
+    padding: 8px;
+    background-color: rgba(236, 15, 15, 0.4);
+    font-size: var(--medium-font);
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Pagina Admin */
+
+/* Titulo */
+.table-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    background-color: aquamarine;
+    align-items: center;
+
+}
+
+.table-title {
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+    padding: 10px;
+    background-color: brown;
+}
+
+/* Tabela */
+.register-table {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    border: 1px solid black;
+}
+
+.register-table th{
+    background-color: wheat;
+    font-size: var(--bigger-font);
+
+}
+
+.register-table td{
+    font-size: var(--medium-font);
+    background-color: antiquewhite;
+}
+
+.register-table th, td {
+    border-bottom: 1px solid #ddd;
+    height: 20px;
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+  }
+

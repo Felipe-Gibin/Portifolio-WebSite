@@ -1,0 +1,46 @@
+{% extends "global/base.html" %}
+
+
+{% block content %}
+    <div class='table-container'>
+        <div class='table-title'>
+            <h1>Home - Admin</h1>
+            <form method='get'>
+                
+                {% if switch_state == 'projects' %}
+                    <button type='submit' name='switch_state' value='tags'>Tags</button>
+                {% else %}
+                    <button type='submit' name='switch_state' value='projects'>Projects</button>
+                {% endif %}
+                    
+            </form>
+
+        </div>
+
+        <table class='register-table'>
+            <thead>
+                <tr>
+                    <thead>
+                        <tr>
+                            <th><a href="?order_by={% if request.GET.order_by == 'id' %}-id{% else %}id{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">ID</a></th>
+                            <th><a href="?order_by={% if request.GET.order_by == 'name' %}-name{% else %}name{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">NAME</a></th>
+                        </tr>
+                    </thead>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in objects %}
+                <tr>
+                    <td>{{ obj.id }}</td>
+                    <td>{{ obj.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+    </div>    
+
+
+{% endblock content %}

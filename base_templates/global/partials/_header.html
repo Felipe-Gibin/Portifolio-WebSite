@@ -1,5 +1,10 @@
 <header>
     <nav>
+        
+        {% comment %}
+            TODO: Ajustar Header corretamente
+            TODO: Corrigir botão logout
+        {% endcomment %}
         <ul class='nav-header'>
             <li><a href="{% url 'mainSite:home' %}">Home</a></li>
             <li><a href="{% url 'project:projectList' %}">Projetos</a></li>
@@ -7,12 +12,12 @@
             <li><a href="{% url 'mainSite:aboutMe' %}">Contato</a></li>
             <li><a href="/admin/">Admin</a></li>
             <li><a href="{% url 'my_admin:login' %}">MY ADMIN</a></li>
-            <li><a href="{% url 'my_admin:login_success' %}">MY ADMIN PAGE</a></li>
+            <li><a href="{% url 'my_admin:home' %}?switch_state=projects">MY ADMIN PAGE</a></li>
             <li>{% if user.is_authenticated %}
-                <form method="post" action="{% url 'my_admin:logout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="logout-link">Logout</button>
-                </form>
+                    <a href="#" onclick="document.getElementById('logout-form').submit();" class="logout-link">Logout</a>
+                    <form id="logout-form" action="{% url 'my_admin:logout' %}" method="post" style="display: none;">
+                        {% csrf_token %}
+                    </form>
                 {% endif %}</li>
         </ul>
     </nav>
