@@ -8,9 +8,9 @@
             <form method='get'>
                 
                 {% if switch_state == 'projects' %}
-                    <button type='submit' name='switch_state' value='tags'>Tags</button>
+                    <button type='submit' name='switch_state' value='tags'>Trocar para: Tags</button>
                 {% else %}
-                    <button type='submit' name='switch_state' value='projects'>Projects</button>
+                    <button type='submit' name='switch_state' value='projects'>Trocar para: Projects</button>
                 {% endif %}
                     
             </form>
@@ -22,8 +22,11 @@
                 <tr>
                     <thead>
                         <tr>
-                            <th><a href="?order_by={% if request.GET.order_by == 'id' %}-id{% else %}id{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">ID</a></th>
-                            <th><a href="?order_by={% if request.GET.order_by == 'name' %}-name{% else %}name{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">NAME</a></th>
+                            <th class='col-id'><a href="?order_by={% if request.GET.order_by == 'id' %}-id{% else %}id{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">ID</a></th>
+                            <th class='col-name'><a href="?order_by={% if request.GET.order_by == 'name' %}-name{% else %}name{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">NAME</a></th>
+                            <th class='col-created-at'><a href="?order_by={% if request.GET.order_by == 'created_at' %}-created_at{% else %}created_at{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">CREATED AT</a></th>
+                            <th class='col-updated-at'><a href="?order_by={% if request.GET.order_by == 'updated_at' %}-updated_at{% else %}updated_at{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">LAST UPDATE</a></th>
+                            {% if switch_state == 'tags' %}<th class='col-img-icon' ><a href="#">IMG</a></th>{% endif %}
                         </tr>
                     </thead>
                 </tr>
@@ -31,15 +34,30 @@
             <tbody>
                 {% for obj in objects %}
                 <tr>
-                    <td>{{ obj.id }}</td>
-                    <td>{{ obj.name }}</td>
+                    <td class='col-id' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}">{{ obj.id }}</a></td>
+                    <td class='col-name' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}">{{ obj.name }}</a></td>
+                    <td class='col-created-at' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}">{{ obj.created_at|date:"d/m/Y" }}</a></td>
+                    <td class='col-updated-at' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}">{{ obj.updated_at|date:"d/m/Y" }}</a></td>
+                    {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}"><img src="{{ obj.img_icon.url }}" alt="{{ obj.name }}"></a></td>{% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-
-
+        <div class='paginator pag-admin'>
+            {% if page_obj.has_previous %}
+                <a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">Primeira</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Anterior</a>
+            {% endif %}
+                
+            <span>
+                {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            </span>
+            
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Próxima</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">Última</a>
+            {% endif %}
+        </div>
     </div>    
 
 

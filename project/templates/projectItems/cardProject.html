@@ -43,7 +43,7 @@
     <div class='card-container'>
         {% for project in projects %}
         <div class= 'card-item'>
-            <a href="{% url 'project:projectDetail' slug=project.slug%}" class="select-project"></a>
+            <a href="{% url 'project:projectDetail' slug=project.slug %}" class="select-project"></a>
             <h1>{{ project.name }}</h1>
             
             {% if project.img_icon %}

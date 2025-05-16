@@ -22,6 +22,7 @@ body, html, main, h1, h2, h3, h4, h5, h6, p, a, ul, li {
 /* Definição do tamanho da fonte */
 html {
     font-size: 62.5%;
+    background-color: #f0f0f0;
 }
 
 /* Corpo Principal */
@@ -245,6 +246,11 @@ footer {
     color: blue;
 }
 
+/* Config paginação admin */
+.pag-admin {
+    text-align: center;
+}
+
 /* -------------------------------------------------------------------------- */
 /* Detalhe de cada projeto */
 .detail-project {
@@ -357,17 +363,16 @@ footer {
 /* -------------------------------------------------------------------------- */
 /* Pagina Admin */
 
-/* Titulo */
+/* Container principal */
 .table-container {
     display: flex;
     flex-direction: column;
     flex: 1;
     width: 100%;
-    background-color: aquamarine;
     align-items: center;
-
 }
 
+/* Container titulo */
 .table-title {
     display: flex;
     gap: 20px;
@@ -378,28 +383,88 @@ footer {
 
 /* Tabela */
 .register-table {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
+    border-collapse: collapse;
     border: 1px solid black;
+    overflow: hidden;
+    border-radius: 15px;
+    margin: 20px;
 }
 
+/* Tabela - cabeçalho */
 .register-table th{
-    background-color: wheat;
+    background-color: #e299de;
     font-size: var(--bigger-font);
 
 }
 
-.register-table td{
+/* Tabela - registros */
+.register-table tr{
     font-size: var(--medium-font);
-    background-color: antiquewhite;
+}
+.register-table tr:nth-child(odd){
+    background-color: #e9bde7;
+}
+.register-table tr:nth-child(even){
+    background-color: #e6c4e4;
+}
+.register-table tr:hover {
+    background-color: #eba8e6;
 }
 
-.register-table th, td {
-    border-bottom: 1px solid #ddd;
-    height: 20px;
-    width: 100%;
+
+/* Tabela - registros */
+.register-table td {
+    border-bottom: 1px solid #4b4b4b;
+    height: 40px;
     text-align: left;
     padding: 8px;
-  }
+}
 
+/* Tabela - cabeçalho */
+.register-table th {
+    border-bottom: 1px solid #3f3f3f;
+    height: 20px;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Tabela - links */
+.register-table thead a {
+    text-decoration: none;
+    color: black;
+}
+
+.register-table tbody a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    align-content: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* Tabela - definir larguras */
+.register-table col-id {
+    width: 5%;
+}
+.register-table col-name {
+    width: auto;
+}
+
+.col-img-icon img {
+    height: inherit;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Formulario adicao projeto */
+.container-form-proj {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    background-color: aqua;
+    width: 80%;
+}

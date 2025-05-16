@@ -1,10 +1,10 @@
 from typing import Any
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView, UpdateView
 from django.views.generic import ListView
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from .forms import CustomLoginForm
+from .forms import CustomLoginForm, ProjectAddForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.shortcuts import redirect
@@ -37,6 +37,8 @@ class MyAdminHome(LoginRequiredMixin, ListView):
     template_name = 'my_admin/my_admin_home.html'
     login_url = 'mainSite:home'
     context_object_name = 'objects'
+    paginate_by = 10
+    ordering = ['-id']
 
     def get_ordering(self):
         ordering = self.request.GET.get('order_by', '-id')
@@ -54,5 +56,13 @@ class MyAdminHome(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['switch_state'] = self.request.GET.get("switch_state", "tags")
+        querydict = self.request.GET.copy()
+        querydict.pop('page', None)
+        context['querystring'] = querydict.urlencode()
         return context
-    
+
+class ProjectAdd(UpdateView):
+    model = Project
+    template_name = 'my_admin/my_admin_form_tag.html'
+    form_class = ProjectAddForm
+    success_url = reverse_lazy('my_admin:home')
