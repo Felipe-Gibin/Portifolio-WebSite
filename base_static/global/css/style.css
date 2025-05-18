@@ -1,5 +1,6 @@
 /* Variáveis */
 :root {
+    /* Tamanhos de fonte */
     --smallest-font: 0.2rem;
     --smaller-font: 0.6rem;
     --small-font: 0.8rem;
@@ -7,6 +8,32 @@
     --big-font: 1.8rem;
     --bigger-font: 2.0rem;
     --biggest-font: 2.4rem;
+
+    /* Cores basicas */
+    --white: #f0f0f0;
+    --gray: #808080;
+    --black: #0f0f0f;
+    --black-purple:#2d1f39;
+
+    /* Cor Principal */
+    --lightest-primary-color: hsl(278, 60%, 70%);
+    --lighter-primary-color: hsl(278, 60%, 64%);
+    --light-primary-color: hsl(278, 60%, 54%);
+    --primary-color: hsl(278, 60%, 50%);
+    --dark-primary-color: hsl(278, 60%, 46%);
+    --darker-primary-color: hsl(278, 60%, 36%);
+    --darkest-primary-color: hsl(278, 60%, 30%);
+
+    /* Cor Secundaria */
+    --lightest-secondary-color: hsl(305, 70%, 70%);
+    --lighter-secondary-color: hsl(305, 70%, 64%);
+    --light-secondary-color: hsl(305, 70%, 54%);
+    --secondary-color: hsl(305, 70%, 50%);
+    --dark-secondary-color: hsl(305, 70%, 46%);
+    --darker-secondary-color: hsl(305, 70%, 36%);
+    --darkest-secondary-color: hsl(305, 70%, 30%);
+    --lightest-secondary-color-transparent: hsl(305, 70%, 70%, 0.4);
+    --lighter-secondary-color-transparent: hsl(305, 70%, 64%, 0.5);
 }
 
 
@@ -22,7 +49,8 @@ body, html, main, h1, h2, h3, h4, h5, h6, p, a, ul, li {
 /* Definição do tamanho da fonte */
 html {
     font-size: 62.5%;
-    background-color: #f0f0f0;
+    color: var(--black-purple);
+    background-color: var(--white);
 }
 
 /* Corpo Principal */
@@ -34,7 +62,7 @@ body {
     justify-content: center;
     width: 100%;
     min-height: 100vh;
-    color: white;
+    
 }
 
 /* Corpo do conteúdo */
@@ -45,7 +73,6 @@ main {
     width: 100%;
     height: calc(100vh - 25px);
     margin: 0 auto;
-    color: black;
     overflow: hidden;
 }
 
@@ -60,7 +87,8 @@ main {
 header {
     display: flex;
     flex-direction: row;
-    background-color: purple;
+    background-color: var(--primary-color);
+    color: var(--white);
     width: 100%;
 }
 header ul {
@@ -80,13 +108,13 @@ header ul {
 /* Link's cabeçalho */
 .nav-header a {
     text-decoration: none;
-    color: white;
+    color: inherit;
     padding: 10px;
 }
 
 /* Link's cabeçalho ao passar o mouse*/
 .nav-header a:hover {
-    background-color: blue;
+    background-color: var(--dark-primary-color);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -94,10 +122,11 @@ header ul {
 footer {
     font-size: var(--smaller-font);
     justify-items: center;
-    background-color: purple;
+    background-color: var(--primary-color);
     width: 100%;
     max-height: 25px;
     padding: 10px;
+    color: var(--white);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -127,10 +156,14 @@ footer {
 
 /* Botão do filtro de projetos */
 .container-2 button {
-    background-color: lightpink;
+    background-color: var(--lightest-secondary-color);
     border: 1px solid black;
-    border-radius: 15%;
+    border-radius: 8%;
     width: fit-content;
+}
+.container-2 button:hover {
+    background-color: var(--lightest-secondary-color);
+    scale: 1.06;
 }
 
 /* Container principal dos cards de projetos */
@@ -138,8 +171,6 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: pink;
-    color: white;
     width: 80%;
     margin: 0 auto;
     gap: 30px;
@@ -161,8 +192,8 @@ footer {
 
 /* Seleção do projeto */
 .select-project:hover{
-    background-color: aqua;
-    opacity: 20%;
+    background-color: var(--dark-secondary-color);
+    opacity: 40%;
     }
     
 /* Container do card em si */
@@ -171,12 +202,14 @@ footer {
     position: relative;
     flex-direction: column;
     flex: 0 0 calc(20% - 28px);
-    height: 200px;
+    height: 300px;
     min-width: 160px;
     align-items: center;
-    background-color: red;
-    border: 2px solid black;
+    background-color: var(--secondary-color);
+    border: 2px solid var(--black-purple);
     border-radius: 10%;
+    box-shadow: 5px 5px 10px var(--black-purple);
+    opacity: 80%;
 }
 /* Telas médias: 3 cards por linha */
 @media (max-width: 1000px) {
@@ -238,12 +271,40 @@ footer {
     margin: 10px auto;
     padding: 20px;
     text-align: right;
+    cursor: default ;
+}
+
+.paginator ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    gap: 0.5rem;
 }
 
 /* Config links da paginação */
 .paginator a{
     text-decoration: none;
-    color: blue;
+    color: var(--black-purple);
+    padding: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.paginator .current-page{
+    cursor: default ;
+
+}
+.paginator .active{
+    background-color: var(--lightest-secondary-color-transparent);
+    border: 2px solid var(--black-purple);      
+    border-radius: 30%;
+}
+.paginator .active:hover {
+    background-color: var(--lighter-secondary-color-transparent);
+}
+
+.paginator a:hover, li:hover {
+    transform: scale(1.1);
 }
 
 /* Config paginação admin */

@@ -70,19 +70,22 @@
     </div>
 
     <div class='paginator'>
-        
-        {% if page_obj.has_previous %}
-        <a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">Primeira</a>
-        <a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Anterior</a>
-        {% endif %}
+        {% if page_obj.has_other_pages %}
+            <ul>
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&lt;</a>
+                    <li><a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">1</a></li>
+                {% endif %}
 
-        <span>
-            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-        </span>
-        
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Próxima</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">Última</a>
+                <li class='active'><a class='current-page'>
+                    {{ page_obj.number }}
+                </a></li>
+                
+                {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">{{ page_obj.paginator.num_pages }}</a></li>
+                <li><a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;</a></li>
+                {% endif %}
+            </ul>
         {% endif %}
     </div>
     
