@@ -14,19 +14,28 @@
             <div class="field">
                 <label for="{{ form.short_desc.id_for_label }}">Short Description:</label>
                 {{ form.short_desc }}
+                <div id="counter-short">0 / 400</div>
             </div>
             <div class="field">
                 <label for="{{ form.long_desc.id_for_label }}">Long Description:</label>
                 {{ form.long_desc }}
+                <div id="counter-long">0</div>
             </div>
-            <div class="field-img">
+            <div class="img-field">
+                <label class='field-label' for="{{ form.img_icon.id_for_label }}">Select icon:</label>
                 <img src="{{ project.img_icon.url }}" alt="{{ project.name }}">
-                {{ form.img_icon }}
+                <div>
+                    {{ form.img_icon }}
+                </div>
             </div>
-            <div class="field">
+            <div class="tags-field">
+                <label for="{{ form.tags.id_for_label }}">Select tags:</label>
                 {{ form.tags }}
             </div>
-            <button type="submit">Salvar</button>
+            <div class="button-field">
+                <button type="submit" name="action" value="save">Salvar</button>
+                <button type="submit" name="action" value="continue">Salvar e continuar editando</button>
+            </div>
         </form>
     </div>   
 

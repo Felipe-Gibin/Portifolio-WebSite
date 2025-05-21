@@ -1,18 +1,17 @@
 from typing import Any
 from django.views.generic.edit import FormView, CreateView, UpdateView
 from django.views.generic import ListView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from .forms import CustomLoginForm, ProjectForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import logout
-from django.shortcuts import redirect
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CustomLoginForm, ProjectForm
+from .mixins import ProjectTagsFormMixin
 from project.models import Project, Tags
 
 #TODO: Arrumar nomes
-
+    
 class MyAdminLogin(FormView):
     template_name = 'my_admin/login.html'
     form_class = CustomLoginForm
@@ -61,8 +60,6 @@ class MyAdminHome(LoginRequiredMixin, ListView):
         context['querystring'] = querydict.urlencode()
         return context
 
-class ProjectAdd(UpdateView):
+class ProjectAdd(ProjectTagsFormMixin, UpdateView):
     model = Project
-    template_name = 'my_admin/my_admin_form_tag.html'
     form_class = ProjectForm
-    success_url = reverse_lazy('my_admin:home')

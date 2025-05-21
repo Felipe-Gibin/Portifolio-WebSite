@@ -16,10 +16,19 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = ['name', 'short_desc', 'long_desc', 'img_icon', 'tags']
         widgets = {
-            'tags': forms.CheckboxSelectMultiple(),
-            'name': forms.TextInput(attrs={'class': 'input-control', 'placeholder': 'Project name'}),
-            'short_desc': forms.Textarea(attrs={'class': 'input-short-desc', 'placehodler': 'Enter a short description..', 'maxlength': 400}),
-            'long_desc': forms.Textarea(attrs={'class': 'input-long-desc', 'placehodler': 'Enter a longer description..'}),
+            'name': forms.TextInput(attrs={
+                'class': 'input-name', 
+                'placeholder': 'Project name'}),
+            'short_desc': forms.Textarea(attrs={
+                'id': 'short-desc', 
+                'class': 'input-short-desc',
+                'placeholder': 'Enter a short description..',
+                'maxlength': 400}),
+            'long_desc': forms.Textarea(attrs={
+                'id': 'long-desc',
+                'class': 'input-long-desc',
+                'placeholder': 'Enter a longer description..'}),
             'img_icon': forms.ClearableFileInput(attrs={'class': 'input-img'}),
+            'tags': forms.CheckboxSelectMultiple(),
         }
     
