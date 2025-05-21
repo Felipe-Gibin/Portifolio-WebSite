@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener('click', (e) => {
         e.preventDefault();
         deleteUrl = e.currentTarget.getAttribute('data-url');
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
         });
     });
 
