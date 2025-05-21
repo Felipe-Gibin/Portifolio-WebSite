@@ -11,11 +11,15 @@ class CustomLoginForm(AuthenticationForm):
         'invalid_login': "Usuário ou senha incorretos. Tente novamente.",
     }
     
-class ProjectAddForm(forms.ModelForm):
+class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['name', 'short_desc', 'long_desc', 'img_icon']
+        fields = ['name', 'short_desc', 'long_desc', 'img_icon', 'tags']
         widgets = {
-            'tags': forms.CheckboxSelectMultiple()
+            'tags': forms.CheckboxSelectMultiple(),
+            'name': forms.TextInput(attrs={'class': 'input-control', 'placeholder': 'Project name'}),
+            'short_desc': forms.Textarea(attrs={'class': 'input-short-desc', 'placehodler': 'Enter a short description..', 'maxlength': 400}),
+            'long_desc': forms.Textarea(attrs={'class': 'input-long-desc', 'placehodler': 'Enter a longer description..'}),
+            'img_icon': forms.ClearableFileInput(attrs={'class': 'input-img'}),
         }
     

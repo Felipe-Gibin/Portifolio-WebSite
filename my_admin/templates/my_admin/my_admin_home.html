@@ -4,12 +4,12 @@
 {% block content %}
     <div class='table-container'>
         <div class='table-title'>
-            <h1>Home - Admin</h1>
             <form method='get'>
-                
                 {% if switch_state == 'projects' %}
+                    <h1>{{ switch_state.title }} - Admin</h1>
                     <button type='submit' name='switch_state' value='tags'>Trocar para: Tags</button>
                 {% else %}
+                    <h1>{{ switch_state.title }} - Admin</h1>
                     <button type='submit' name='switch_state' value='projects'>Trocar para: Projects</button>
                 {% endif %}
                     
@@ -47,8 +47,8 @@
             {% if page_obj.has_other_pages %}
                 <ul>
                     {% if page_obj.has_previous %}
+                    <li><a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">&lt;&lt;</a></li>
                     <li><a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&lt;</a>
-                        <li><a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">1</a></li>
                     {% endif %}
     
                     <li class='active'><a class='current-page'>
@@ -56,8 +56,8 @@
                     </a></li>
                     
                     {% if page_obj.has_next %}
-                    <li><a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">{{ page_obj.paginator.num_pages }}</a></li>
                     <li><a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;</a></li>
+                    <li><a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;&gt;</a></li>
                     {% endif %}
                 </ul>
             {% endif %}

@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from .forms import CustomLoginForm, ProjectAddForm
+from .forms import CustomLoginForm, ProjectForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.shortcuts import redirect
@@ -64,5 +64,5 @@ class MyAdminHome(LoginRequiredMixin, ListView):
 class ProjectAdd(UpdateView):
     model = Project
     template_name = 'my_admin/my_admin_form_tag.html'
-    form_class = ProjectAddForm
+    form_class = ProjectForm
     success_url = reverse_lazy('my_admin:home')

@@ -3,9 +3,29 @@
 
 {% block content %}
     <div class='container-form-proj'>
+        <h1>Project: {{ project.name }}</h1>
         <form method='post'>
             {% csrf_token %}
-            {{ form.as_p }}
+            <div class="field">
+                <label for="{{ form.name.id_for_label }}">Project Name:</label>
+                {{ form.name }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.short_desc.id_for_label }}">Short Description:</label>
+                {{ form.short_desc }}
+            </div>
+            <div class="field">
+                <label for="{{ form.long_desc.id_for_label }}">Long Description:</label>
+                {{ form.long_desc }}
+            </div>
+            <div class="field-img">
+                <img src="{{ project.img_icon.url }}" alt="{{ project.name }}">
+                {{ form.img_icon }}
+            </div>
+            <div class="field">
+                {{ form.tags }}
+            </div>
             <button type="submit">Salvar</button>
         </form>
     </div>   
