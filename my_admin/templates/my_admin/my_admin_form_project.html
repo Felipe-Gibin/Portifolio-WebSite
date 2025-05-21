@@ -3,11 +3,11 @@
 
 {% block content %}
     <div class='container-form-proj'>
-        <h1>Tag: {{ tag.name }}</h1>
+        <h1>Project: {{ project.name }}</h1>
         <form method='post'>
             {% csrf_token %}
             <div class="field">
-                <label for="{{ form.name.id_for_label }}">Tag Name:</label>
+                <label for="{{ form.name.id_for_label }}">Project Name:</label>
                 {{ form.name }}
             </div>
 

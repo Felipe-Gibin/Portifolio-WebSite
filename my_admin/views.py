@@ -1,13 +1,14 @@
 from typing import Any
-from django.views.generic.edit import FormView, CreateView, UpdateView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse_lazy, reverse
 from django.views import View
+from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CustomLoginForm, ProjectForm
-from .mixins import ProjectTagsFormMixin
+from .forms import CustomLoginForm, ProjectForm, TagsForm
+from .mixins import ProjectFormMixin, TagFormMixin
 from project.models import Project, Tags
 
 #TODO: Arrumar nomes
@@ -60,6 +61,30 @@ class MyAdminHome(LoginRequiredMixin, ListView):
         context['querystring'] = querydict.urlencode()
         return context
 
-class ProjectAdd(ProjectTagsFormMixin, UpdateView):
+class ProjectAdd(ProjectFormMixin, CreateView):
     model = Project
     form_class = ProjectForm
+    
+class ProjectEdit(ProjectFormMixin, UpdateView):
+    model = Project
+    form_class = ProjectForm
+
+class ProjectDelete(View):
+    def post(self, request, slug):
+        obj = get_object_or_404(Project, slug=slug)
+        obj.delete()
+        return JsonResponse({'success': True})
+
+class TagAdd(TagFormMixin, CreateView):
+    model = Tags
+    form_class = TagsForm
+    
+class TagEdit(TagFormMixin, UpdateView):
+    model = Tags
+    form_class = TagsForm
+
+class TagDelete(View):
+    def post(self, request, slug):
+        obj = get_object_or_404(Tags, slug=slug)
+        obj.delete()
+        return JsonResponse({'success': True})

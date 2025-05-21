@@ -17,7 +17,7 @@ class Project(models.Model):
     long_desc= models.TextField(null=True, blank=True)
     img_icon = models.ImageField(upload_to='project_icon/%Y-%m/', null=True, blank=True)
     tags = models.ManyToManyField('Tags', default='', blank=True)
-    created_at = models.DateTimeField(auto_now_add=False)
+    created_at = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     
     def process_img_p(self) -> None:
@@ -74,10 +74,10 @@ class Tags(models.Model):
         verbose_name_plural = 'Tag'
     name = models.CharField(max_length=20)
     slug = models.SlugField(unique=True, blank=True)
-    desc_short = models.TextField(max_length=200)
-    desc_long = models.TextField(null=True, blank=True)
+    short_desc = models.TextField(max_length=200)
+    long_desc = models.TextField(null=True, blank=True)
     img_icon = models.ImageField(upload_to='tag_icon/%Y-%m/', blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=False)
+    created_at = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     
     # FIXME: Retificar func

@@ -8,9 +8,13 @@
                 {% if switch_state == 'projects' %}
                     <h1>{{ switch_state.title }} - Admin</h1>
                     <button type='submit' name='switch_state' value='tags'>Trocar para: Tags</button>
+                    <a href="{% url 'my_admin:project_new' %}" class="new-register">New Project</a>
+                    
                 {% else %}
                     <h1>{{ switch_state.title }} - Admin</h1>
                     <button type='submit' name='switch_state' value='projects'>Trocar para: Projects</button>
+                    <a href="{% url 'my_admin:tag_new' %}" class="new-register">New Tag</a>
+                    
                 {% endif %}
                     
             </form>
@@ -27,18 +31,27 @@
                             <th class='col-created-at'><a href="?order_by={% if request.GET.order_by == 'created_at' %}-created_at{% else %}created_at{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">CREATED AT</a></th>
                             <th class='col-updated-at'><a href="?order_by={% if request.GET.order_by == 'updated_at' %}-updated_at{% else %}updated_at{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">LAST UPDATE</a></th>
                             {% if switch_state == 'tags' %}<th class='col-img-icon' ><a href="#">IMG</a></th>{% endif %}
+                            <th class="col-delete"></th>
                         </tr>
                     </thead>
                 </tr>
             </thead>
             <tbody>
                 {% for obj in objects %}
+                {% if switch_state == 'projects' %}
+                    {% url 'my_admin:project_edit' slug=obj.slug as edit_url %}
+                    {% url 'my_admin:project_delete' slug=obj.slug as delete_url %}
+                {% else %}
+                    {% url 'my_admin:tag_edit' slug=obj.slug as edit_url %}
+                    {% url 'my_admin:tag_delete' slug=obj.slug as delete_url %}
+                {% endif %}
                 <tr>
-                    <td class='col-id' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}">{{ obj.id }}</a></td>
-                    <td class='col-name' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}">{{ obj.name }}</a></td>
-                    <td class='col-created-at' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}">{{ obj.created_at|date:"d/m/Y" }}</a></td>
-                    <td class='col-updated-at' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}">{{ obj.updated_at|date:"d/m/Y" }}</a></td>
-                    {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{% url 'my_admin:projects_form' slug=obj.slug %}"><img src="{{ obj.img_icon.url }}" alt="{{ obj.name }}"></a></td>{% endif %}
+                    <td class='col-id' ><a href="{{ edit_url }}">{{ obj.id }}</a></td>
+                    <td class='col-name' ><a href="{{ edit_url }}">{{ obj.name }}</a></td>
+                    <td class='col-created-at' ><a href="{{ edit_url }}">{{ obj.created_at|date:"d/m/Y" }}</a></td>
+                    <td class='col-updated-at' ><a href="{{ edit_url }}">{{ obj.updated_at|date:"d/m/Y" }}</a></td>
+                    {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{{ edit_url }}">{% if obj.img_icon %}<img src="{{ obj.img_icon.url }}" alt="{{ obj.name }}">{% endif %}</a></td>{% endif %}
+                    <td class="col-delete"><a href="#" class="btn-delete" data-url="{{ delete_url }}">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -61,6 +74,15 @@
                     {% endif %}
                 </ul>
             {% endif %}
+        </div>
+        
+        {# Pop-up Confirmação #}
+        <div id="confirm-delete-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <p>Tem certeza que deseja deletar este registro?</p>
+                <button id="confirm-delete-yes">Sim, deletar</button>
+                <button id="confirm-delete-no">Cancelar</button>
+            </div>
         </div>
     </div>    
 
