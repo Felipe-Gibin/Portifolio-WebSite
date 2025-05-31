@@ -29,7 +29,7 @@ if __name__ == '__main__':
     print('\n' * 10)
     print('--------------INICIANDO--------------')
     import faker
-    from project.models import Project, Tags
+    from projects_app.models import Project, Tags
     start = datetime.now()
     
     IMG_PATHS = DJANGO_BASE_DIR / 'media' / 'icons_for_injection'

@@ -1,0 +1,64 @@
+{% extends "global/base.html" %}
+{% load getDict %}
+
+{% block content %}
+    <div class='container-2'>
+        <h1>Projetos</h1>
+        <details>
+            
+            {% if filter_tag %}
+            <summary class='tag-filter'>Filtro | {{ filter_tag.title }}</summary>
+
+            {% else %}
+            <summary class='tag-filter'>Filtro</summary>
+
+            {% endif %}
+            <form method="get">
+              <select name="tag">
+                <option value="">--------</option>
+                {% for tag in tags.all %}
+                <option value="{{ tag.slug }}">{{ tag.name }}</option>
+                {% endfor %}
+              </select>
+              <button type="submit" >Filtrar</button>
+            </form>
+        </details>
+        
+        {% comment %}
+        Tentativa de estilizar o filtro
+        
+        <div class='custom-dropdown' >
+            <div class='custom-summary' tabindex="0">
+                <ul class='custom-option'>
+                    {% for tag in tags.all %}
+                    <li>{{ tag.tag_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endcomment %}
+        
+    </div>
+
+    {% include "projects_app/partials/_project_card.html" %}
+
+    <div class='paginator'>
+        {% if page_obj.has_other_pages %}
+            <ul>
+                {% if page_obj.has_previous %}
+                <li><a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">&lt;&lt;</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&lt;</a>
+                {% endif %}
+
+                <li class='active'><a class='current-page'>
+                    {{ page_obj.number }}
+                </a></li>
+                
+                {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;</a></li>
+                <li><a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;&gt;</a></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% load getDict %}
+<div class='card-container'>
+    {% for project in projects %}
+        <div class= 'card-item'>
+            <a href="{% url 'projects_app:project_detail' slug=project.slug %}" class="select-project"></a>
+            <h1>{{ project.name }}</h1>
+                
+            {% if project.img_icon %}
+                <img class="img-card" src="{{ project.img_icon.url }}" alt="project.name">
+            {% else %}
+                <div class='img-card'></div>    
+            {% endif %}
+                    
+            <div class='card-tags'>
+                <ul>
+                    {% for tag in custom_tags_list|get_item:project.pk %}
+                                
+                        {% if tag.img_icon %}
+                            <li><a href="{% url 'projects_app:home' %}?tag={{ tag.slug }}"><img src="{{ tag.img_icon.url }}" alt="{{ tag.name }}" title="{{ tag.name }}"></a></li>     
+                        {% else %}
+                            <li>{{ tag.name }}</li>
+                        {% endif %}
+                                    
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}  
+</div>

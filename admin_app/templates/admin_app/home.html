@@ -1,0 +1,92 @@
+{% extends "global/base.html" %}
+
+
+{% block content %}
+    <div class='table-container'>
+        <div class='table-title'>
+            <form method='get'>
+                {% if switch_state == 'projects' %}
+                    <h1>{{ switch_state.title }} - Admin</h1>
+                    <button type='submit' name='switch_state' value='tags'>Trocar para: Tags</button>
+                    <a href="{% url 'admin_app:project_new' %}" class="new-register">New Project</a>
+                    
+                {% else %}
+                    <h1>{{ switch_state.title }} - Admin</h1>
+                    <button type='submit' name='switch_state' value='projects'>Trocar para: Projects</button>
+                    <a href="{% url 'admin_app:tag_new' %}" class="new-register">New Tag</a>
+                    
+                {% endif %}
+                    
+            </form>
+
+        </div>
+
+        <table class='register-table'>
+            <thead>
+                <tr>
+                    <thead>
+                        <tr>
+                            <th class='col-id'><a href="?order_by={% if request.GET.order_by == 'id' %}-id{% else %}id{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">ID</a></th>
+                            <th class='col-name'><a href="?order_by={% if request.GET.order_by == 'name' %}-name{% else %}name{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">NAME</a></th>
+                            <th class='col-created-at'><a href="?order_by={% if request.GET.order_by == 'created_at' %}-created_at{% else %}created_at{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">CREATED AT</a></th>
+                            <th class='col-updated-at'><a href="?order_by={% if request.GET.order_by == 'updated_at' %}-updated_at{% else %}updated_at{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">LAST UPDATE</a></th>
+                            {% if switch_state == 'tags' %}<th class='col-img-icon' ><a href="#">IMG</a></th>{% endif %}
+                            <th class="col-delete"></th>
+                        </tr>
+                    </thead>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in objects %}
+                {% if switch_state == 'projects' %}
+                    {% url 'admin_app:project_edit' slug=obj.slug as edit_url %}
+                    {% url 'admin_app:project_delete' slug=obj.slug as delete_url %}
+                {% else %}
+                    {% url 'admin_app:tag_edit' slug=obj.slug as edit_url %}
+                    {% url 'admin_app:tag_delete' slug=obj.slug as delete_url %}
+                {% endif %}
+                <tr>
+                    <td class='col-id' ><a href="{{ edit_url }}">{{ obj.id }}</a></td>
+                    <td class='col-name' ><a href="{{ edit_url }}">{{ obj.name }}</a></td>
+                    <td class='col-created-at' ><a href="{{ edit_url }}">{{ obj.created_at|date:"d/m/Y" }}</a></td>
+                    <td class='col-updated-at' ><a href="{{ edit_url }}">{{ obj.updated_at|date:"d/m/Y" }}</a></td>
+                    {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{{ edit_url }}">{% if obj.img_icon %}<img src="{{ obj.img_icon.url }}" alt="{{ obj.name }}">{% endif %}</a></td>{% endif %}
+                    <td class="col-delete"><a href="#" class="btn-delete" data-url="{{ delete_url }}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class='paginator'>
+            {% if page_obj.has_other_pages %}
+                <ul>
+                    {% if page_obj.has_previous %}
+                    <li><a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">&lt;&lt;</a></li>
+                    <li><a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&lt;</a>
+                    {% endif %}
+    
+                    <li class='active'><a class='current-page'>
+                        {{ page_obj.number }}
+                    </a></li>
+                    
+                    {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;</a></li>
+                    <li><a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;&gt;</a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+
+        {# Pop-up Confirmação #}
+        <div id="confirm-delete-modal" class="modal" style="display:none;">
+            <div class='modal-position'>
+                <div class="modal-content">
+                    <p>Tem certeza que deseja deletar este registro?</p>
+                    <button id="confirm-delete-yes">Sim, deletar</button>
+                    <button id="confirm-delete-no">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+{% endblock content %}

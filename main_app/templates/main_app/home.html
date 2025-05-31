@@ -1,0 +1,10 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+<div class='title-main'>
+    <h1>Portifólio</h1>
+    <h2>{{ cargo }}</h2>
+        
+    {% include "projects_app/partials/_project_card.html" %}
+</div>
+{% endblock content %}
