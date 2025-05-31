@@ -1,7 +1,11 @@
 {% extends "global/base.html" %}
+{% load static %}
 
 
 {% block content %}
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'global/css/pages/login.css' %}">
+    {% endblock extra_css %}
 
     <div class="login-wraper">
         {% if form.non_field_errors %}

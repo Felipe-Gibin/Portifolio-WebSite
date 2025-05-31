@@ -1,0 +1,38 @@
+.paginator {
+    font-size: var(--bigger-font);
+    width: 80%;
+    margin: 10px auto;
+    padding: 20px;
+    text-align: right;
+    cursor: default ;
+}
+
+.paginator ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    gap: 0.5rem;
+}
+
+/* Config links da paginação */
+.paginator a{
+    text-decoration: none;
+    color: var(--black-purple);
+    padding: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.paginator .current-page{
+    cursor: default ;
+
+}
+
+.paginator li:not(.active):hover {
+    transform: scale(1.1);
+}
+
+/* Config paginação admin */
+.pag-admin {
+    text-align: center;
+}

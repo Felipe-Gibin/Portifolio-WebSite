@@ -1,0 +1,48 @@
+:root {
+    /* Tamanhos de fonte */
+    --smallest-font: 0.2rem;
+    --smaller-font: 0.6rem;
+    --small-font: 0.8rem;
+    --medium-font: 1.4rem;
+    --big-font: 1.8rem;
+    --bigger-font: 2.0rem;
+    --biggest-font: 2.4rem;
+
+    /* Cores basicas */
+    --white: #f0f0f0;
+    --gray: #808080;
+    --black: #0f0f0f;
+    --black-purple:#2d1f39;
+    --placeholder-color: rgba(100, 100, 100, 0.3);
+
+    /* Cor Principal */
+    --lightest-primary-color: hsl(278, 60%, 70%);
+    --lighter-primary-color: hsl(278, 60%, 64%);
+    --light-primary-color: hsl(278, 60%, 54%);
+    --primary-color: hsl(278, 60%, 50%);
+    --dark-primary-color: hsl(278, 60%, 46%);
+    --darker-primary-color: hsl(278, 60%, 36%);
+    --darkest-primary-color: hsl(278, 60%, 30%);
+
+    /* Cor Secundaria */
+    --lightest-secondary-color: hsl(305, 70%, 70%);
+    --lighter-secondary-color: hsl(305, 70%, 64%);
+    --light-secondary-color: hsl(305, 70%, 54%);
+    --secondary-color: hsl(302, 47%, 55%);
+    --dark-secondary-color: hsl(305, 70%, 46%);
+    --darker-secondary-color: hsl(305, 70%, 36%);
+    --darkest-secondary-color: hsl(305, 70%, 30%);
+    --lightest-secondary-color-transparent: hsl(305, 70%, 70%, 0.4);
+    --lighter-secondary-color-transparent: hsl(305, 70%, 64%, 0.5);
+
+    /* Cor terciaria */
+    --lightest-tertiary-color: hsl(310, 35%, 84%);
+    --lighter-tertiary-color: hsl(310, 35%, 79%);
+    --light-tertiary-color: hsl(310, 35%, 74%);
+    --tertiary-color: hsl(310, 35%, 70%);
+    --dark-tertiary-color: hsl(310, 35%, 66%);
+    --darker-tertiary-color: hsl(310, 35%, 62%);
+    --darkest-tertiary-color: hsl(310, 35%, 58%);
+
+
+}

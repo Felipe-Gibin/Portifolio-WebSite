@@ -1,7 +1,14 @@
 {% extends "global/base.html" %}
 {% load getDict %}
+{% load static %}
+
 
 {% block content %}
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'global/css/paginator.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/projects.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/partials/project_card.css' %}">
+    {% endblock extra_css %}
     <div class='container-2'>
         <h1>Projetos</h1>
         <details>

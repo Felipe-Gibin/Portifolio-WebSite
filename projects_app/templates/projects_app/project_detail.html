@@ -1,27 +1,30 @@
 {% extends "global/base.html" %}
-
+{% load static %}
 
 {% block content %}
-<div class='detail-project'>
-    <div>
-        <h1>Project name: {{ project.name }}</h1>
-        <h1>Descrição curta: </h1>
-        <p>{{ project.short_desc }}</p>
-        <h1>Tags: </h1>
-        <ul>
-        {% for tag in project.tags.all %}
-            {% if  tag.img_icon  %}
-                <li><img src="{{ tag.img_icon.url }}" alt="{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}
-                </li>
-            {% else %}
-                <li>{{ tag.name }}</li>
-            {% endif %}
-        {% endfor %}
-        </ul>        
-        <h1>Descrição Longa: </h1>
-        <p>{{ project.long_desc }}</p>
-        <h1>Created at: {{ project.created_at }} </h1>
-        <h1>Updated at: {{ project.updated_at }} </h1>
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'global/css/project_detail.css' %}">
+    {% endblock extra_css %}
+    <div class='detail-project'>
+        <div>
+            <h1>Project name: {{ project.name }}</h1>
+            <h1>Descrição curta: </h1>
+            <p>{{ project.short_desc }}</p>
+            <h1>Tags: </h1>
+            <ul>
+            {% for tag in project.tags.all %}
+                {% if  tag.img_icon  %}
+                    <li><img src="{{ tag.img_icon.url }}" alt="{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}
+                    </li>
+                {% else %}
+                    <li>{{ tag.name }}</li>
+                {% endif %}
+            {% endfor %}
+            </ul>        
+            <h1>Descrição Longa: </h1>
+            <p>{{ project.long_desc }}</p>
+            <h1>Created at: {{ project.created_at }} </h1>
+            <h1>Updated at: {{ project.updated_at }} </h1>
+        </div>
     </div>
-</div>
 {% endblock content %}

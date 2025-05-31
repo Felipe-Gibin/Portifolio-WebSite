@@ -1,7 +1,10 @@
 {% extends 'global/base.html' %}
-
+{% load static %}
 
 {% block content %}
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'global/css/admin_forms.css' %}">
+    {% endblock extra_css %}
     <div class='container-form-proj'>
         <h1>Tag: {{ tag.name }}</h1>
         <form method='post'>
