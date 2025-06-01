@@ -14,3 +14,7 @@
     font-size: var(--biggest-font);
     padding: 10px;
 }
+.detail-project	img{
+    width: 160px;
+    height: 160px;
+}

@@ -1,4 +1,5 @@
 {% extends 'global/base.html' %}
+{% load template_filters %}
 {% load static %}
 
 
@@ -28,7 +29,8 @@
             </div>
             <div class="img-field">
                 <label class='field-label' for="{{ form.img_icon.id_for_label }}">Select icon:</label>
-                {% if project.img_icon %}<img src="{{ project.img_icon.url }}" alt="{{ project.name }}">{% endif %}
+                {# TODO: Descobrir porque não esta salvando a foto #}
+                {% if project.img_icon %}<img src="{{ project.img_icon | img_or_default }}" alt="{{ project.name }}">{% endif %}
                 
                 <div>
                     {{ form.img_icon }}

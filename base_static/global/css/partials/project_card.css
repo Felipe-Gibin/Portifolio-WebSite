@@ -69,8 +69,8 @@
 /* Config das imagens dos cards */
 .img-card {
     margin: auto;
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
 }
 
 /* Config das tags dos cards */
@@ -78,6 +78,11 @@
     width: 80%;
     margin-bottom: 5px;
     justify-items: center;
+}
+
+.img-tag{
+    width: 40px;
+    height: 40px;
 }
 
 /* Config do texto das tags */

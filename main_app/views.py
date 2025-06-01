@@ -13,13 +13,16 @@ class Home(ListView):
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         project_tags_list = {}
+        tags_list = []
         
         context["cargo"] = 'Python Developer | Data Scientist'
         context["tags"] = Tags.objects.all()
-        for project in context['projects']:
-            tags_list = list(project.tags.all())
-        project_tags_list[project.pk] = tags_list[:5]
-        context["custom_tags_list"] = project_tags_list
+        if context['projects']:
+            for project in context['projects']:
+                if project.tags.all().exists():
+                    tags_list = list(project.tags.all())
+            project_tags_list[project.pk] = tags_list[:5]
+            context["custom_tags_list"] = project_tags_list
         return context
 
 class AboutMe(TemplateView):

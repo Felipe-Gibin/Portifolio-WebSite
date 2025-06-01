@@ -3,6 +3,9 @@ cd ..
 
 source venv/Scripts/activate
 
+python manage.py makemigrations projects_app
+python manage.py makemigrations admin_app
+python manage.py makemigrations main_app
 python manage.py makemigrations
 python manage.py migrate
 

@@ -1,4 +1,5 @@
 {% extends "global/base.html" %}
+{% load template_filters %}
 {% load static %}
 
 
@@ -55,7 +56,7 @@
                     <td class='col-name' ><a href="{{ edit_url }}">{{ obj.name }}</a></td>
                     <td class='col-created-at' ><a href="{{ edit_url }}">{{ obj.created_at|date:"d/m/Y" }}</a></td>
                     <td class='col-updated-at' ><a href="{{ edit_url }}">{{ obj.updated_at|date:"d/m/Y" }}</a></td>
-                    {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{{ edit_url }}">{% if obj.img_icon %}<img src="{{ obj.img_icon.url }}" alt="{{ obj.name }}">{% endif %}</a></td>{% endif %}
+                    {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{{ edit_url }}"><img src="{{ obj.img_icon | img_or_default }}" alt="{{ obj.name }}"></a></td>{% endif %}
                     <td class="col-delete"><a href="#" class="btn-delete" data-url="{{ delete_url }}">Delete</a></td>
                 </tr>
                 {% endfor %}
