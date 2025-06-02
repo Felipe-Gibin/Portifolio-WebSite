@@ -1,9 +1,15 @@
 {% extends "global/base.html" %}
+{% load static %}
 
 
 {% block content %}
-<div class='title-main'>
-    <h1>Sobre</h1>
-    <h2>Mucho Texto</h2>
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'global/css/pages/about_me.css' %}">
+    {% endblock %}
+<div class='container'>
+    <div class="text-container">
+        <h1>Sobre</h1>
+        <h2>Mucho Texto</h2>
+    </div>
 </div>
 {% endblock content %}

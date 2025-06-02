@@ -5,12 +5,17 @@
 {% block content %}
     {% block extra_css %}
         <link rel="stylesheet" href="{% static 'global/css/partials/project_card.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/pages/home.css' %}">
     {% endblock %}
 
-    <div class='title-main'>
-        <h1>Portifólio</h1>
-        <h2>{{ cargo }}</h2>
-            
-        {% include "projects_app/partials/_project_card.html" %}
+    <div class="container">
+        <div class="text-container">
+            <h1>Portifólio</h1>
+            <h2>{{ cargo }}</h2>
+        </div>
+        
+        <div class="fav-container">
+            {% include "projects_app/partials/_project_card.html" %}
+        </div>
     </div>
 {% endblock content %}

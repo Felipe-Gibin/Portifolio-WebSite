@@ -9,31 +9,33 @@ import utils.constants as consts
 
 # Define um novo nome para o arquivo de imagem
 def new_image_name(name: str) -> str:
-    new_name = "".join(name + '.png')
+    new_name = name.replace(" ", "_")
+    new_name += ".png"
     
     project_path = consts.MEDIA_PROJECT / new_name
     tag_path = consts.MEDIA_TAG / new_name
     
-    if not project_path.exists() or tag_path.exists():
+    if not project_path.exists() and not tag_path.exists():
         return new_name
 
-    if project_path.exists() and not tag_path.exists():
+    if project_path.exists():
         return unique_name(project_path)
 
     return unique_name(tag_path)
 
 # Garante que o nome do arquivo de imagem seja unico
 def unique_name(path: Path) -> str:
-    name, _ = path.name.split('.')
-    local_path = path
-    i = 0
+    name = path.stem
+    ext = path.suffix
+    new_path = path
+    counter = 1
     
-    while local_path.exists():
-        new_name = ''.join(name + str(i) + '.png')
-        local_path = path.parent / new_name
-        i += 1
+    while new_path.exists():
+        new_name = f"{name}{counter}{ext}"
+        new_path = path.parent / new_name
+        counter += 1
         
-    return new_name
+    return new_path.name
 
 def resize_image(image_obj: Image.Image) -> Image.Image:
     img = image_obj.resize((1000, 1000))

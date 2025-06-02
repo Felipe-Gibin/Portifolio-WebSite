@@ -1,7 +1,4 @@
-/* -------------------------------------------------------------------------- */
-/* Página de projetos, listagem */
-/* Container do titulo de projetos */
-.container-2 {
+.container {
     display: flex;
     position: relative;
     align-items: center;
@@ -14,7 +11,7 @@
 }
 
 /* Filtro dos projetos, colapsável */
-.container-2 details {
+.container details {
     position: absolute;
     font-size: var(--biggest-font);
     left: 60%;
@@ -24,13 +21,13 @@
 }
 
 /* Botão do filtro de projetos */
-.container-2 button {
+.container button {
     background-color: var(--lightest-secondary-color);
     border: 1px solid black;
     border-radius: 8%;
     width: fit-content;
 }
-.container-2 button:hover {
+.container button:hover {
     background-color: var(--lightest-secondary-color);
     scale: 1.06;
 }

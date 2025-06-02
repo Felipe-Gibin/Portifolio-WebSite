@@ -1,0 +1,36 @@
+header {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: var(--bigger-font);
+    width: 100%;
+}
+
+/* Navegação cabeçalho */
+.header-nav {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    list-style-type: none;
+    font-weight: bold;
+}
+
+/* Link's cabeçalho */
+.header-nav a {
+    text-decoration: none;
+    color: inherit;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Link's cabeçalho ao passar o mouse*/
+.header-nav a:hover {
+    background-color: var(--dark-primary-color);
+}
+
+.logout {
+    position: absolute;
+    right: 10px;
+    text-align: end;
+}

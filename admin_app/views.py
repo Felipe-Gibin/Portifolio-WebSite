@@ -33,7 +33,7 @@ class CustomLogoutView(View):
 
 class MyAdminHome(LoginRequiredMixin, ListView):
     template_name = 'admin_app/home.html'
-    login_url = 'main_app:home'
+    login_url = 'admin_app:login'
     context_object_name = 'objects'
     paginate_by = 10
     ordering = ['-id']

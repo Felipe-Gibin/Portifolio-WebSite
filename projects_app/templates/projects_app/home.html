@@ -5,12 +5,13 @@
 
 {% block content %}
     {% block extra_css %}
-        <link rel="stylesheet" href="{% static 'global/css/paginator.css' %}">
-        <link rel="stylesheet" href="{% static 'global/css/projects.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/pages/projects_home.css' %}">
         <link rel="stylesheet" href="{% static 'global/css/partials/project_card.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/paginator.css' %}">
     {% endblock extra_css %}
-    <div class='container-2'>
+    <div class='container'>
         <h1>Projetos</h1>
+
         <details>
             
             {% if filter_tag %}
@@ -30,21 +31,7 @@
               <button type="submit" >Filtrar</button>
             </form>
         </details>
-        
-        {% comment %}
-        Tentativa de estilizar o filtro
-        
-        <div class='custom-dropdown' >
-            <div class='custom-summary' tabindex="0">
-                <ul class='custom-option'>
-                    {% for tag in tags.all %}
-                    <li>{{ tag.tag_name }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        {% endcomment %}
-        
+
     </div>
 
     {% include "projects_app/partials/_project_card.html" %}

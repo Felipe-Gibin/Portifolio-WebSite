@@ -20,7 +20,7 @@
 }
 
 .container-login {
-    background-color: rgba(97, 12, 112, 0.2);
+    background-color: var(--login-background);
     padding: 20px;
     border-radius: 10px;
     display: flex;
@@ -39,14 +39,14 @@
 
 .container-login button {
     width: 110%;
-    background-color: rgba(97, 12, 112, 0.3);
+    background-color: var(--login-button);
     border: 1px solid black;
     border-radius: 8px;
     padding: 8px;
 }
 
 .container-login button:hover{
-    background-color: rgba(97, 12, 112, 0.4);
+    background-color: var(--login-button-hover);
     scale: 1.02;
 }
 
@@ -78,7 +78,7 @@
     justify-content: center;
     margin: 5px;
     padding: 8px;
-    background-color: rgba(236, 15, 15, 0.4);
+    background-color: var(--login-error);
     font-size: var(--medium-font);
     margin-top: 5px;
     border: 1px solid black;

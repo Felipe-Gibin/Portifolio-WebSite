@@ -1,5 +1,5 @@
 /* Correçção das margens */
-body, html, main, h1, h2, h3, h4, h5, h6, p, a, ul, li {
+html, body, header, footer, main, div, h1, h2, h3, h4, h5, h6, p, a, ul, li {
     margin: 0;
     padding: 0;
 }
@@ -16,10 +16,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
     justify-content: center;
     width: 100%;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* Corpo do conteúdo */
@@ -31,57 +31,4 @@ main {
     height: calc(100vh - 25px);
     margin: 0 auto;
     overflow: hidden;
-}
-
-/* Centralizar texto principal */
-.title-main {
-    justify-items: center;
-    font-size: var(--biggest-font);
-}
-
-/* -------------------------------------------------------------------------- */
-/* Cabeçalho */
-header {
-    display: flex;
-    flex-direction: row;
-    background-color: var(--primary-color);
-    color: var(--white);
-    width: 100%;
-}
-header ul {
-    margin: 10px;
-    padding: 10px;
-    font-size: var(--bigger-font);
-}
-
-/* Navegação cabeçalho */
-.nav-header {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    font-weight: bold;
-}
-
-/* Link's cabeçalho */
-.nav-header a {
-    text-decoration: none;
-    color: inherit;
-    padding: 10px;
-}
-
-/* Link's cabeçalho ao passar o mouse*/
-.nav-header a:hover {
-    background-color: var(--dark-primary-color);
-}
-
-/* -------------------------------------------------------------------------- */
-/* Rodapé */
-footer {
-    font-size: var(--smaller-font);
-    justify-items: center;
-    background-color: var(--primary-color);
-    width: 100%;
-    max-height: 25px;
-    padding: 10px;
-    color: var(--white);
 }

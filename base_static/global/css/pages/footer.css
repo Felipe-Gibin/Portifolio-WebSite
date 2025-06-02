@@ -1,0 +1,9 @@
+footer {
+    font-size: var(--smaller-font);
+    justify-items: center;
+    background-color: var(--primary-color);
+    width: 100%;
+    max-height: 25px;
+    padding: 10px;
+    color: var(--white);
+}

@@ -6,11 +6,11 @@
 
 {% block content %}
     {% block extra_css %}
-        <link rel="stylesheet" href="{% static 'global/css/admin_forms.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/pages/admin_forms.css' %}">
     {% endblock extra_css %}
     <div class='container-form-proj'>
         <h1>Project: {{ project.name }}</h1>
-        <form method='post'>
+        <form method='post' enctype="multipart/form-data">
             {% csrf_token %}
             <div class="field">
                 <label for="{{ form.name.id_for_label }}">Project Name:</label>
@@ -27,13 +27,12 @@
                 {{ form.long_desc }}
                 <div id="counter-long">0</div>
             </div>
-            <div class="img-field">
+            <div class="field">
                 <label class='field-label' for="{{ form.img_icon.id_for_label }}">Select icon:</label>
-                {# TODO: Descobrir porque não esta salvando a foto #}
-                {% if project.img_icon %}<img src="{{ project.img_icon | img_or_default }}" alt="{{ project.name }}">{% endif %}
-                
-                <div>
-                    {{ form.img_icon }}
+                <div class="img-field-border">
+                    <div>
+                        {{ form.img_icon }}
+                    </div>
                 </div>
             </div>
             <div class="tags-field">

@@ -5,11 +5,11 @@
 
 {% block content %}
     {% block extra_css %}
-        <link rel="stylesheet" href="{% static 'global/css/admin_home.css' %}">
-        <link rel="stylesheet" href="{% static 'global/css/paginator.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/pages/admin_home.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/partials/paginator.css' %}">
     {% endblock extra_css %}
-    <div class='table-container'>
-        <div class='table-title'>
+    <div class='container'>
+        <div class='container-title'>
             <form method='get'>
                 {% if switch_state == 'projects' %}
                     <h1>{{ switch_state.title }} - Admin</h1>
