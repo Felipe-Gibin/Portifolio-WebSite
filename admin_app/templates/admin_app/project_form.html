@@ -39,6 +39,18 @@
                 <label for="{{ form.tags.id_for_label }}">Select tags:</label>
                 {{ form.tags }}
             </div>
+
+            <div class="boolean-fields">
+                <div class="field">
+                    <label for="{{ form.visibility.id_for_label }}">Visible?</label>
+                {{ form.visibility }}
+                </div>
+                <div class="field">
+                    <label for="{{ form.featured.id_for_label }}">Featured?</label>
+                    {{ form.featured }}
+                </div>
+            </div>
+        
             <div class="button-field">
                 <button type="submit" name="action" value="save">Salvar</button>
                 <button type="submit" name="action" value="continue">Salvar e continuar editando</button>

@@ -15,4 +15,6 @@ urlpatterns = [
     path('protected/tag/new/', views.TagAdd.as_view(), name='tag_new'),
     path('protected/tag/<slug:slug>/', views.TagEdit.as_view(), name='tag_edit'),
     path('protected/tag/<slug:slug>/delete/', views.TagDelete.as_view(), name='tag_delete'),
+    
+    path('projects/toggle/<int:pk>/<str:field>/', views.ToggleBooleanFields.as_view(), name='toggle_boolean'),
 ]

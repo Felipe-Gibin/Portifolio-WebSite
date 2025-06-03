@@ -73,6 +73,17 @@ class ProjectDelete(View):
         obj.delete()
         return JsonResponse({'success': True})
 
+class ToggleBooleanFields(View):
+    def post(self, request, pk, field):
+        project = get_object_or_404(Project, pk=pk)
+        
+        if field in ['visibility', 'featured']:
+            value = request.POST.get('value') == 'on'
+            setattr(project, field, value)
+            project.save()
+        
+        return redirect(request.META.get('HTTP_REFERER', 'admin_app:home'))
+
 class TagAdd(TagFormMixin, CreateView):
     model = Tags
     form_class = TagsForm
@@ -86,3 +97,5 @@ class TagDelete(View):
         obj = get_object_or_404(Tags, slug=slug)
         obj.delete()
         return JsonResponse({'success': True})
+    
+

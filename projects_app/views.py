@@ -9,7 +9,7 @@ class ProjectsHome(ListView):
     template_name = 'projects_app/home.html'
     model = Project
     context_object_name = 'projects'
-    paginate_by = 5
+    paginate_by = 3
     ordering = ['-id']
     
     def get_queryset(self):
@@ -18,6 +18,8 @@ class ProjectsHome(ListView):
         if tag_slug:
             tag = get_object_or_404(Tags, slug=tag_slug)
             queryset = queryset.filter(tags=tag)
+            
+        queryset = queryset.filter(visibility=True)
         return queryset
     
         
@@ -31,7 +33,7 @@ class ProjectsHome(ListView):
         querydict.pop('page', None)
         context['querystring'] = querydict.urlencode()
         
-        custom_tags_list = {}
+        project_tags_list = {}
         
         filter_tag_obj = None
         if filter_tag:
@@ -39,14 +41,16 @@ class ProjectsHome(ListView):
                 filter_tag_obj = Tags.objects.get(slug=filter_tag)
             except Tags.DoesNotExist:
                 filter_tag_obj = None
-            
-        for project in context['projects']:
-            tags_list = list(project.tags.all())
-            if filter_tag_obj in tags_list:
-                tags_list.remove(filter_tag_obj)
-                tags_list = [filter_tag_obj] + tags_list
-            custom_tags_list[project.pk] = tags_list[:5]
-        context["custom_tags_list"] = custom_tags_list  
+        
+        if context.get('projects'):    
+            for project in context['projects']:
+                tags_list = list(project.tags.all())
+                if filter_tag_obj in tags_list:
+                    tags_list.remove(filter_tag_obj)
+                    tags_list = [filter_tag_obj] + tags_list
+                project_tags_list[project.pk] = tags_list[:5]
+                    
+        context["custom_tags_list"] = project_tags_list
             
         return context
     

@@ -34,9 +34,12 @@
                         <tr>
                             <th class='col-id'><a href="?order_by={% if request.GET.order_by == 'id' %}-id{% else %}id{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">ID</a></th>
                             <th class='col-name'><a href="?order_by={% if request.GET.order_by == 'name' %}-name{% else %}name{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">NAME</a></th>
-                            <th class='col-created-at'><a href="?order_by={% if request.GET.order_by == 'created_at' %}-created_at{% else %}created_at{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">CREATED AT</a></th>
                             <th class='col-updated-at'><a href="?order_by={% if request.GET.order_by == 'updated_at' %}-updated_at{% else %}updated_at{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">LAST UPDATE</a></th>
-                            {% if switch_state == 'tags' %}<th class='col-img-icon' ><a href="#">IMG</a></th>{% endif %}
+                            {% if switch_state == 'tags' %}<th class='col-img-icon' >IMG</th>{% endif %}
+                            {% if switch_state == 'projects' %}
+                                <th class='col-visibility'><a href="?order_by={% if request.GET.order_by == 'visibility' %}-visibility{% else %}visibility{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">VISIBILITY</th></a>
+                                <th class='col-featured'><a href="?order_by={% if request.GET.order_by == 'featured' %}-featured{% else %}featured{% endif %}{% if request.GET.switch_state %}&switch_state={{ request.GET.switch_state }}{% endif %}">FEATURED</th></a>
+                            {% endif %}
                             <th class="col-delete"></th>
                         </tr>
                     </thead>
@@ -54,14 +57,29 @@
                 <tr>
                     <td class='col-id' ><a href="{{ edit_url }}">{{ obj.id }}</a></td>
                     <td class='col-name' ><a href="{{ edit_url }}">{{ obj.name }}</a></td>
-                    <td class='col-created-at' ><a href="{{ edit_url }}">{{ obj.created_at|date:"d/m/Y" }}</a></td>
                     <td class='col-updated-at' ><a href="{{ edit_url }}">{{ obj.updated_at|date:"d/m/Y" }}</a></td>
                     {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{{ edit_url }}"><img src="{{ obj.img_icon | img_or_default }}" alt="{{ obj.name }}"></a></td>{% endif %}
+                    {% if switch_state == 'projects' %}
+                        <td class='col-visibility' >
+                            <form method="post" action="{% url 'admin_app:toggle_boolean' obj.pk 'visibility' %}">
+                                {% csrf_token %}
+                                <input type="checkbox" name="value" onchange="this.form.submit()" {% if obj.visibility %}checked{% endif %}>
+                            </form>
+                        </td>
+                        <td class='col-featured' >
+                            <form method="post" action="{% url 'admin_app:toggle_boolean' obj.pk 'featured' %}">
+                                {% csrf_token %}
+                                <input type="checkbox" name="value" onchange="this.form.submit()" {% if obj.featured %}checked{% endif %}>
+                            </form>
+                        </td>
+                    {% endif %}
                     <td class="col-delete"><a href="#" class="btn-delete" data-url="{{ delete_url }}">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+
         <div class='paginator'>
             {% if page_obj.has_other_pages %}
                 <ul>

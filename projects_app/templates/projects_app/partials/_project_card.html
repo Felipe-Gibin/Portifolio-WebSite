@@ -1,25 +1,32 @@
 {% load template_filters %}
 {% load static %}
 
+{% comment %}
+    <a href="{% url 'projects_app:project_detail' slug=project.slug %}" class="select-project"></a>
+                        
+{% endcomment %}
+
 <div class='card-container'>
-    {% for project in projects %}
-        <div class= 'card-item'>
-            <a href="{% url 'projects_app:project_detail' slug=project.slug %}" class="select-project"></a>
-            <h1>{{ project.name }}</h1>
-                
-            
-            <img class="img-card" src="{{ project.img_icon | img_or_default }}" alt="project.name">
-            
+    <ul class= 'cards'>
+        {% for project in projects %}
+            <li class= 'card-item'>
+                <div class="card"><a href="{% url 'projects_app:project_detail' project.slug%}" class='card-link'>
                     
-            <div class='card-tags'>
-                <ul>
-                    {% for tag in custom_tags_list|get_item:project.pk %}
-                                
-                        <li><a href="{% url 'projects_app:home' %}?tag={{ tag.slug }}"><img src="{{ tag.img_icon | img_or_default }}" alt="{{ tag.name }}" title="{{ tag.name }}" class="img-tag"></a></li>     
-                                    
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    {% endfor %}  
+                    <img src="{{ project.img_icon | img_or_default }}" alt="{{ project.name }}" class="card-image">
+                    
+                    
+                    <div class="card-content">
+                        <div class="card-title">{{ project.name }}</div>
+                        <p class="class-text">{{ project.short_desc }}</p>
+                    </div>
+                    <div class="tag-images">
+                        {% for tag in custom_tags_list|get_item:project.pk %}            
+                            <img src="{{ tag.img_icon | img_or_default }}" alt="{{ tag.name }}" title="{{ tag.name }}" class="tag-icon">              
+                        {% endfor %}
+                    </div>
+                </a></div>
+            </li>
+        {% endfor %}  
+    </ul>
+
 </div>

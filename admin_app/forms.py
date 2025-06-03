@@ -14,7 +14,7 @@ class CustomLoginForm(AuthenticationForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['name', 'short_desc', 'long_desc', 'img_icon', 'tags']
+        fields = ['name', 'short_desc', 'long_desc', 'img_icon', 'tags', 'visibility', 'featured']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'input-name', 

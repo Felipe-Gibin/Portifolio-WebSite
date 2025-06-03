@@ -55,9 +55,9 @@
 }
 
 /* Config do foco nas entradas */
-.input-short-desc:focus, .input-long-desc:focus, .input-name:focus, .input-img:hover, #id_tags:hover, .img-field-border:hover  {
+.input-short-desc:focus, .input-long-desc:focus, .input-name:focus, .input-img:hover, #id_tags:hover, .img-field-border:hover, .boolean-fields:hover  {
     outline: none;
-    border-color: var(--primary-color);
+    border-color: var(--light-secondary-color);
 }
 
 /* Estilo da scrollbar pelo WebKit */
@@ -116,7 +116,7 @@
 .tags-field {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 80%;
     justify-content: center;
 }
 #id_tags {
@@ -141,13 +141,26 @@
     font-size: var(--big-font);
     padding: 10px;
     margin: 5px;
-    background-color: var(--lightest-tertiary-color);
+    background-color: var(--lighter-tertiary-color);
     border: 2px solid var(--black-purple);
     border-radius: 10px;
     box-shadow: 2px 4px 7px var(--black-purple);
 }
 .container-form-proj button:hover{
-    background-color: var(--lighter-tertiary-color);
+    background-color: var(--light-tertiary-color);
     outline: none;
     border-color: var(--primary-color);
+}
+
+.boolean-fields {
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+    transition: 0.3s ease;
+    border: 2px solid var(--black-purple);
+    border-radius: 10px;
+    padding: 8px 12px;
+    transition: border 0.2s ease;
+    box-shadow: 2px 4px 7px var(--black-purple);
+    background-color: transparent;
 }
