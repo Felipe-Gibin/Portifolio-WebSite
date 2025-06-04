@@ -7,18 +7,19 @@
     {% block extra_css %}
         <link rel="stylesheet" href="{% static 'global/css/pages/admin_home.css' %}">
         <link rel="stylesheet" href="{% static 'global/css/partials/paginator.css' %}">
+        <script src="{% static 'global/js/forms/pop_up_for_delete.js' %}"></script>
     {% endblock extra_css %}
     <div class='container'>
         <div class='container-title'>
             <form method='get'>
                 {% if switch_state == 'projects' %}
                     <h1>{{ switch_state.title }} - Admin</h1>
-                    <button type='submit' name='switch_state' value='tags'>Trocar para: Tags</button>
+                    <button type='submit' name='switch_state' value='tags'>Switch to Tags</button>
                     <a href="{% url 'admin_app:project_new' %}" class="new-register">New Project</a>
                     
                 {% else %}
                     <h1>{{ switch_state.title }} - Admin</h1>
-                    <button type='submit' name='switch_state' value='projects'>Trocar para: Projects</button>
+                    <button type='submit' name='switch_state' value='projects'>Switch to Projects</button>
                     <a href="{% url 'admin_app:tag_new' %}" class="new-register">New Tag</a>
                     
                 {% endif %}

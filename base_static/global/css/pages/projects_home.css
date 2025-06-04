@@ -22,13 +22,13 @@
 
 /* Botão do filtro de projetos */
 .container button {
-    background-color: var(--lightest-secondary-color);
+    background-color: var(--lighter-tertiary-color);
     border: 1px solid black;
-    border-radius: 8%;
+    border-radius: 6px;
     width: fit-content;
 }
 .container button:hover {
-    background-color: var(--lightest-secondary-color);
+    background-color: var(--light-tertiary-color);
     scale: 1.06;
 }
 

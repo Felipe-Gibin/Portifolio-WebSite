@@ -10,15 +10,15 @@
         <link rel="stylesheet" href="{% static 'global/css/partials/paginator.css' %}">
     {% endblock extra_css %}
     <div class='container'>
-        <h1>Projetos</h1>
+        <h1>Projects</h1>
 
         <details>
             
             {% if filter_tag %}
-            <summary class='tag-filter'>Filtro | {{ filter_tag.title }}</summary>
+            <summary class='tag-filter'>Filter | {{ filter_tag.title }}</summary>
 
             {% else %}
-            <summary class='tag-filter'>Filtro</summary>
+            <summary class='tag-filter'>Filter</summary>
 
             {% endif %}
             <form method="get">
@@ -28,7 +28,7 @@
                 <option value="{{ tag.slug }}">{{ tag.name }}</option>
                 {% endfor %}
               </select>
-              <button type="submit" >Filtrar</button>
+              <button type="submit" >Fitler</button>
             </form>
         </details>
 

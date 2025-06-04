@@ -2,8 +2,10 @@ from typing import Any
 from django.shortcuts import render
 from django.views import View
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, FormView
 from projects_app.models import Project, Tags
+from .forms import ContactMeForm
+from django.urls import reverse_lazy
 
 class Home(ListView):
     model = Project
@@ -34,5 +36,11 @@ class Home(ListView):
         context["custom_tags_list"] = project_tags_list
         return context
 
-class AboutMe(TemplateView):
+class AboutMe(FormView):
     template_name = 'main_app/about_me.html'
+    form_class = ContactMeForm
+    success_url = reverse_lazy('main_app:about_me')
+    
+    def form_valid(self, form):
+        form.save() 
+        return super().form_valid(form)

@@ -5,6 +5,7 @@
 {% block content %}
     {% block extra_css %}
         <link rel="stylesheet" href="{% static 'global/css/pages/admin_forms.css' %}">
+        <script src="{% static 'global/js/forms/char_counter.js' %}"></script>
     {% endblock extra_css %}
     <div class='container-form-proj'>
         <h1>Tag: {{ tag.name }}</h1>
@@ -35,8 +36,8 @@
                 </div>
             </div>
             <div class="button-field">
-                <button type="submit" name="action" value="save">Salvar</button>
-                <button type="submit" name="action" value="continue">Salvar e continuar editando</button>
+                <button type="submit" name="action" value="save">Save</button>
+                <button type="submit" name="action" value="continue">Save and edit</button>
             </div>
         </form>
     </div>   

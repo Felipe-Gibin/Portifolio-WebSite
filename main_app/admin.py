@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import ContactMeEmail
 
-# Register your models here.
+@admin.register(ContactMeEmail)
+class ContactMeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'email', 'created_at')
+    list_display_links = ('id', 'name', 'email')
+    
