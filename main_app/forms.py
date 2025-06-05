@@ -1,11 +1,11 @@
-from django import forms
 import re
+from django import forms
 from main_app.models import ContactMeEmail
 
 class ContactMeForm(forms.ModelForm):
     class Meta:
         model = ContactMeEmail
-        fields = ['name', 'email', 'phone', 'text']
+        fields = ['name', 'email', 'phone', 'subject', 'text']
         widgets = {
                 'name': forms.TextInput(attrs={
                     'class': 'input-name', 
@@ -13,12 +13,16 @@ class ContactMeForm(forms.ModelForm):
                 }),
                 'email': forms.TextInput(attrs={
                     'class': 'input-email', 
-                    'placeholder': 'Name'
+                    'placeholder': 'Email'
+                }),
+                'subject': forms.TextInput(attrs={
+                    'class': 'input-subject', 
+                    'placeholder': 'Subject'
                 }),
                 'text': forms.Textarea(attrs={
                     'id': 'text', 
                     'class': 'input-text',
-                    'placeholder': 'Enter text..'
+                    'placeholder': 'Enter message..'
                 }),
             }
         
@@ -35,6 +39,9 @@ class ContactMeForm(forms.ModelForm):
             
     def clean_phone(self):
         phone = self.cleaned_data.get('phone', '')
+        if not phone:
+            return None
+        
         cleaned = re.sub(r'\D', '', phone) 
         if len(cleaned) != 13:
             raise forms.ValidationError("Type only 13 digits.")

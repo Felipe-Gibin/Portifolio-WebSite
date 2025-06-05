@@ -7,8 +7,8 @@ html, body, header, footer, main, div, h1, h2, h3, h4, h5, h6, p, a, ul, li {
 /* Definição do tamanho da fonte */
 html {
     font-size: 62.5%;
-    color: var(--black-purple);
-    background-color: var(--white);
+    color: var(--text-primary);
+    background-color: var(--background);
 }
 
 /* Corpo Principal */

@@ -5,6 +5,8 @@
 {% block content %}
     {% block extra_css %}
         <link rel="stylesheet" href="{% static 'global/css/pages/about_me.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/partials/contact_me.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/partials/messages.css' %}">
     {% endblock %}
 
 <div class='container'>
@@ -12,14 +14,8 @@
         <h1>Sobre</h1>
         <h2>Mucho Texto</h2>
     </div>
-    <div>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
-            <script src="{% static 'global/js/phone_mask.js' %}"></script>
-            <button type='submit'>aqui</button>
-        </form>
-    </div>
+
+    {% include 'main_app/partials/contact_me.html' %}
+
 </div>
 {% endblock content %}

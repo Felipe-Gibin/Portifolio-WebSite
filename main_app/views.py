@@ -6,6 +6,7 @@ from django.views.generic import TemplateView, ListView, FormView
 from projects_app.models import Project, Tags
 from .forms import ContactMeForm
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 class Home(ListView):
     model = Project
@@ -43,4 +44,10 @@ class AboutMe(FormView):
     
     def form_valid(self, form):
         form.save() 
+        messages.success(self.request, "Message sent successfully!")
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, "Error submitting form. Check required fields.")
+        return super().form_invalid(form)
+    

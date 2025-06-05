@@ -9,37 +9,39 @@
     {% endblock extra_css %}
     <div class='container-form-proj'>
         <h1>Tag: {{ tag.name }}</h1>
-        <form method='post' enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="field">
-                <label for="{{ form.name.id_for_label }}">Tag Name:</label>
-                {{ form.name }}
-            </div>
+        <div class="container-form">
+            <form method='post' enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="field">
+                    <label for="{{ form.name.id_for_label }}">Tag Name:</label>
+                    {{ form.name }}
+                </div>
 
-            <div class="field">
-                <label for="{{ form.short_desc.id_for_label }}">Short Description:</label>
-                {{ form.short_desc }}
-                <div id="counter-short">0 / 400</div>
-            </div>
-            <div class="field">
-                <label for="{{ form.long_desc.id_for_label }}">Long Description:</label>
-                {{ form.long_desc }}
-                <div id="counter-long">0</div>
-            </div>
-            <div class="field">
-                <label for="{{ form.img_icon.id_for_label }}">Select icon:</label>
-                <div class="img-field-border">
-                    {% if tag.img_icon %}<img src="{{ tag.img_icon | img_or_default }}" alt="{{ tag.name }}">{% endif %}
-                    <div>
-                        {{ form.img_icon }}
+                <div class="field">
+                    <label for="{{ form.short_desc.id_for_label }}">Short Description:</label>
+                    {{ form.short_desc }}
+                    <div id="counter-short">0 / 400</div>
+                </div>
+                <div class="field">
+                    <label for="{{ form.long_desc.id_for_label }}">Long Description:</label>
+                    {{ form.long_desc }}
+                    <div id="counter-long">0</div>
+                </div>
+                <div class="field">
+                    <label for="{{ form.img_icon.id_for_label }}">Select icon:</label>
+                    <div class="img-field-border">
+                        {% if tag.img_icon %}<img src="{{ tag.img_icon | img_or_default }}" alt="{{ tag.name }}">{% endif %}
+                        <div>
+                            {{ form.img_icon }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="button-field">
-                <button type="submit" name="action" value="save">Save</button>
-                <button type="submit" name="action" value="continue">Save and edit</button>
-            </div>
-        </form>
+                <div class="button-field">
+                    <button type="submit" name="action" value="save">Save</button>
+                    <button type="submit" name="action" value="continue">Save and edit</button>
+                </div>
+            </form>
+        </div>
     </div>   
 
 

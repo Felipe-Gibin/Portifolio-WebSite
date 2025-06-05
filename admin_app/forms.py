@@ -28,7 +28,10 @@ class ProjectForm(forms.ModelForm):
                 'id': 'long-desc',
                 'class': 'input-long-desc',
                 'placeholder': 'Enter a longer description..'}),
-            'img_icon': forms.ClearableFileInput(attrs={'class': 'input-img'}),
+            'img_icon': forms.ClearableFileInput(attrs={
+                'class': 'input-img',
+                'accept': 'image/*'
+            }),
             'tags': forms.CheckboxSelectMultiple(),
         }
         

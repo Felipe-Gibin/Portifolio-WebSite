@@ -11,52 +11,84 @@
     {% endblock extra_css %}
     <div class='container-form-proj'>
         <h1>Project: {{ project.name }}</h1>
-        <form method='post' enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="field">
-                <label for="{{ form.name.id_for_label }}">Project Name:</label>
-                {{ form.name }}
-            </div>
+        <div class="container-form">
+            <form method='post' enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="field">
+                    <label for="{{ form.name.id_for_label }}">Project Name:</label>
+                    {{ form.name }}
+                </div>
 
-            <div class="field">
-                <label for="{{ form.short_desc.id_for_label }}">Short Description:</label>
-                {{ form.short_desc }}
-                <div id="counter-short">0 / 400</div>
-            </div>
-            <div class="field">
-                <label for="{{ form.long_desc.id_for_label }}">Long Description:</label>
-                {{ form.long_desc }}
-                <div id="counter-long">0</div>
-            </div>
-            <div class="field">
-                <label class='field-label' for="{{ form.img_icon.id_for_label }}">Select icon:</label>
-                <div class="img-field-border">
+                <div class="field">
+                    <label for="{{ form.short_desc.id_for_label }}">Short Description:</label>
+                    {{ form.short_desc }}
+                    <div id="counter-short">0 / 400</div>
+                </div>
+                <div class="field">
+                    <label for="{{ form.long_desc.id_for_label }}">Long Description:</label>
+                    {{ form.long_desc }}
+                    <div id="counter-long">0</div>
+                </div>
+                <div class="field">
+                    <label class='field-label' for="{{ form.img_icon.id_for_label }}">Select icon:</label>
+
+                    {# FIXME: dar um jeito de resolver essa cagada #}
+                    {% if form.instance.img_icon %}
+                        <div class="img-field-border">
+                            <div class='img-field'>
+                                <span>Current file:</span>
+                                <a href="{{ form.instance.img_icon.url }}">{{ form.instance.img_icon.name }}</a>
+                            </div>
+                            <div class='img-field'>
+                                <label for="img_icon-clear_id">
+                                    Remove file:
+                                </label>
+                                <input type="checkbox" name="img_icon-clear" id="img_icon-clear_id">
+                            </div>
+                            <div class='img-field'>
+                                <label for="img_icon-clear_id">
+                                    Modify file:
+                                    {{ form.img_icon.as_widget }}
+                                </label>
+                            </div>
+                        </div>
+                        {% else %}
+                            <div class="img-field-border">
+                                <div class='img-field'>
+                                    <label for="img_icon-clear_id">
+                                        New file:
+                                        {{ form.img_icon.as_widget }}
+                                    </label>
+                                </div>
+                            </div>
+                        {% endif %}
+                </div>
+                <div class="tags-field">
+                    <label for="{{ form.tags.id_for_label }}">Select tags:</label>
+                    {{ form.tags }}
+                </div>
+
+                <div class="boolean-fields">
+                    <div >
+                        <label for="{{ form.visibility.id_for_label }}">
+                            {{ form.visibility }}
+                            Is Visible?
+                        </label>
+                    </div>
                     <div>
-                        {{ form.img_icon }}
+                        <label for="{{ form.featured.id_for_label }}">
+                            {{ form.featured }}
+                            Is Featured?
+                        </label>
                     </div>
                 </div>
-            </div>
-            <div class="tags-field">
-                <label for="{{ form.tags.id_for_label }}">Select tags:</label>
-                {{ form.tags }}
-            </div>
-
-            <div class="boolean-fields">
-                <div class="field">
-                    <label for="{{ form.visibility.id_for_label }}">Visible?</label>
-                {{ form.visibility }}
+            
+                <div class="button-field">
+                    <button type="submit" name="action" value="save">Save</button>
+                    <button type="submit" name="action" value="continue">Save and edit</button>
                 </div>
-                <div class="field">
-                    <label for="{{ form.featured.id_for_label }}">Featured?</label>
-                    {{ form.featured }}
-                </div>
-            </div>
-        
-            <div class="button-field">
-                <button type="submit" name="action" value="save">Save</button>
-                <button type="submit" name="action" value="continue">Save and edit</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>   
 
 

@@ -27,8 +27,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     input.addEventListener('blur', function () {
-      if (input.value === '+') {
+      const digitsOnly = input.value.replace(/\D/g, '');
+      if (input.value === '+' || digitsOnly.length === 0) {
         input.value = '';
+        input.setCustomValidity('');
+      } else if (digitsOnly.length !== 13) {
+        input.setCustomValidity('Enter exactly 13 numbers (including area code and country code)');
+      } else {
+        input.setCustomValidity('');
       }
     });
   }

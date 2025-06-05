@@ -13,6 +13,7 @@ class ContactMeEmail(models.Model):
         max_length=17,
         validators=[PHONE_NUMBER_VALIDATOR],
         blank=True, null=True)
+    subject = models.CharField(max_length=160)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     

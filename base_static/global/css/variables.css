@@ -8,50 +8,62 @@
     --bigger-font: 2.0rem;
     --biggest-font: 2.4rem;
 
+    /* Background colors */
+    --background: #291f33;
+    --background-inner: #3f3a43;
+    --background-inner-secondary: #332c3a;
+
+    /* text colors */
+    --text-primary: #e6daf5;
+    --text-secondary: #bdaacf;
+    --text-tertiary: #a895ba;
+    --text-inverted: #1a131f;
+    
+    /* Border colors */
+    --border-default: #4b4452;
+    --border-highlight: #6e5d82;
+    --border-muted: #2c2730;
+
+    /* Shadow colors */
+    --shadow-default: 0 4px 6px rgba(138, 101, 168, 0.2);
+    --shadow-elevated: 0 6px 12px rgba(138, 101, 168, 0.4);
+    --shadow-subtle: 0 1px 2px rgba(255, 255, 255, 0.06);
+
     /* Cores basicas */
     --white: #f0f0f0;
     --black-purple:#2d1f39;
     --placeholder-color: rgba(100, 100, 100, 0.3);
 
     /* black pallet */
-    --lightest-gray:#857E89;
-    --lighter-gray: #625E68;
-    --light-gray: #3F3C42;
-    --gray: #1C1A1D;
+    --lightest-gray:#857e89;
+    --lighter-gray: #625e68;
+    --light-gray: #3f3c42;
+    --gray: #1c1a1d;
     --black: #0f0f0f;
 
     /* Cor Principal */
-    --lighter-primary-color: #8A65A8;
-    --light-primary-color: #774A9A;
+    --lighter-primary-color: #8a65a8;
+    --light-primary-color: #774a9a;
     --primary-color: #663587;
-    --dark-primary-color: #531A70;
-    --darker-primary-color: #52057B;
+    --dark-primary-color: #531a70;
+    --darker-primary-color: #52057b;
 
     /* Cor Secundaria */
-    --lighter-secondary-color: #D4B3F6;
-    --light-secondary-color: #C38AF2;
-    --secondary-color: #B368EF;
-    --dark-secondary-color: #A33BEA;
-    --darker-secondary-color: #892CDC;
+    --lighter-secondary-color: #d4b3f6;
+    --light-secondary-color: #c38af2;
+    --secondary-color: #b368ef;
+    --dark-secondary-color: #a33bea;
+    --darker-secondary-color: #892cdc;
 
     /* Cor terciaria */
-    --lighter-tertiary-color: #F3D4FF;
-    --light-tertiary-color: #E99CFF;
-    --tertiary-color: #DF69FF;
-    --dark-tertiary-color: #D53CFF;
-    --darker-tertiary-color: #BC6FF1;
+    --lighter-tertiary-color: #f3d4ff;
+    --light-tertiary-color: #e99cff;
+    --tertiary-color: #df69ff;
+    --dark-tertiary-color: #d53cff;
+    --darker-tertiary-color: #bc6ff1;
 
-    /* table */
-    --odd: #e4bef2;
-    --even: #F3D4FF;
-    --hover: #dbbce7;
-
-    /* transparent */
-    --login-background: rgba(195, 138, 242, 0.5);
-    --login-button: rgba(179, 104, 239, 0.6);
-    --login-button-hover: rgba(179, 104, 239, 0.8);
-    --login-error: rgba(236, 15, 15, 0.4);
-
-
+    --soft-red-light: #d96a6a;
+    --soft-red-dark: #b85050;
+    --warning-red: #e02020cc;
 
 }
