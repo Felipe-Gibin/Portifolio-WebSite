@@ -32,7 +32,6 @@
                 <div class="field">
                     <label class='field-label' for="{{ form.img_icon.id_for_label }}">Select icon:</label>
 
-                    {# FIXME: dar um jeito de resolver essa cagada #}
                     {% if form.instance.img_icon %}
                         <div class="img-field-border">
                             <div class='img-field'>
@@ -48,7 +47,11 @@
                             <div class='img-field'>
                                 <label for="img_icon-clear_id">
                                     Modify file:
-                                    {{ form.img_icon.as_widget }}
+                                    <div class="img-new-field">
+                                        <input type="file" name="img_icon" class="input-img" accept="image/*" id="id_img_icon">
+                                        <button id="custom_file_button" type="button">Choose file:</button>
+                                        <span id="file_name"></span>
+                                    </div>
                                 </label>
                             </div>
                         </div>
@@ -57,7 +60,11 @@
                                 <div class='img-field'>
                                     <label for="img_icon-clear_id">
                                         New file:
-                                        {{ form.img_icon.as_widget }}
+                                        <div class="img-new-field">
+                                            <input type="file" name="img_icon" class="input-img" accept="image/*" id="id_img_icon">
+                                            <button id="custom_file_button" type="button">Choose file:</button>
+                                            <span id="file_name"></span>
+                                        </div>
                                     </label>
                                 </div>
                             </div>

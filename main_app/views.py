@@ -7,6 +7,10 @@ from projects_app.models import Project, Tags
 from .forms import ContactMeForm
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 
 class Home(ListView):
     model = Project
@@ -43,9 +47,46 @@ class AboutMe(FormView):
     success_url = reverse_lazy('main_app:about_me')
     
     def form_valid(self, form):
-        form.save() 
-        messages.success(self.request, "Message sent successfully!")
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        contact = form.save(commit=False)
+        
+        # Dados do formulário
+        name = form.cleaned_data.get('name')
+        email = form.cleaned_data.get('email')
+        phone = form.cleaned_data.get('phone', 'N/A')
+        subject = form.cleaned_data.get('subject')
+        message = form.cleaned_data.get('message')
+        
+        # Gerar corpo do e-mail via template HTML
+        context = {
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'subject': subject,
+            'message': message
+        }
+        html_content = render_to_string('global/emails/contact_message.html', context)
+        
+        try:
+            email_message = EmailMultiAlternatives(
+                subject=subject,
+                body=message,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[settings.DEFAULT_FROM_EMAIL]
+            )
+            email_message.attach_alternative(html_content, "text/html")
+            email_message.send()
+            
+            contact.email_send = True
+            
+            messages.success(self.request, "Message sent successfully!")
+        except Exception as e:
+            
+            print(f"Erros sending email: {e}")
+            messages.error(self.request, "Message saved but failed to send email.")
+        
+        contact.save()
+        return response
     
     def form_invalid(self, form):
         messages.error(self.request, "Error submitting form. Check required fields.")

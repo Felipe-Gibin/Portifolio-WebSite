@@ -29,12 +29,42 @@
                 </div>
                 <div class="field">
                     <label for="{{ form.img_icon.id_for_label }}">Select icon:</label>
-                    <div class="img-field-border">
-                        {% if tag.img_icon %}<img src="{{ tag.img_icon | img_or_default }}" alt="{{ tag.name }}">{% endif %}
-                        <div>
-                            {{ form.img_icon }}
+
+                    {% if form.instance.img_icon %}
+                        <div class="img-field-border">
+                            <div class="img-field">
+                                <span>Current file:</span>
+                                <a href="{{ form.instance.img_icon.url }}">{{ form.instance.img_icon.name }}</a>
+                            </div>
+                            <div class="img-field">
+                                <label for="img_icon-clear_id">Remove file:</label>
+                                <input type="checkbox" name="img_icon-clear" id="img_icon-clear_id">
+                            </div>
+                            <div class="img-field">
+                                <label for="img_icon-clear_id">Modify file:
+                                    <div class="img-new-field">
+                                        <input type="file" name="img_icon" class="input-img" accept="image/*" id="id_img_icon">
+                                        <button id="custom_file_button" type="button">Choose file:</button>
+                                        <span id="file_name"></span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <div class="img-field-border">
+                            <div class='img-field'>
+                                <label for="img_icon-clear_id">
+                                    New file:
+                                    <div class="img-new-field">
+                                        <input type="file" name="img_icon" class="input-img" accept="image/*" id="id_img_icon">
+                                        <button id="custom_file_button" type="button">Choose file:</button>
+                                        <span id="file_name"></span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    
+                    {% endif %}
                 </div>
                 <div class="button-field">
                     <button type="submit" name="action" value="save">Save</button>

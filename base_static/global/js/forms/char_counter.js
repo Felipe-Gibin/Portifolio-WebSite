@@ -25,4 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
         long_desc.addEventListener("input", updateLongCounter);
         updateLongCounter();
     }
+
+    const inputFile = document.getElementById("id_img_icon");
+    const customButton = document.getElementById("custom_file_button");
+    const fileNameSpan = document.getElementById("file_name");
+
+    // Quando clicar no botão, aciona o input
+    customButton.addEventListener("click", () => {
+        inputFile.click();
+    });
+
+    // Quando um arquivo for escolhido
+    inputFile.addEventListener("change", () => {
+        const fileName = inputFile.files[0]?.name || "Nenhum arquivo selecionado";
+        fileNameSpan.textContent = `File selected: ${fileName}`;
+    });
 });

@@ -14,7 +14,9 @@ class ContactMeEmail(models.Model):
         validators=[PHONE_NUMBER_VALIDATOR],
         blank=True, null=True)
     subject = models.CharField(max_length=160)
-    text = models.TextField()
+    message = models.TextField()
+    
+    email_send = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>New message from {{ name.title }}</title>
+</head>
+<body>
+    <h2>New message from {{ name.title }}</h2>
+    <p><strong>Email:</strong> {{ email }}</p>
+    {% if phone %}
+        <p><strong>Phone number:</strong> {{ phone }}</p>
+    {% endif %}
+    <p><strong>Subject:</strong> {{ subject }}</p>
+    <hr>
+    <p>{{ message|linebreaks }}</p>
+</body>
+</html>

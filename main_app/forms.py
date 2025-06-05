@@ -5,7 +5,7 @@ from main_app.models import ContactMeEmail
 class ContactMeForm(forms.ModelForm):
     class Meta:
         model = ContactMeEmail
-        fields = ['name', 'email', 'phone', 'subject', 'text']
+        fields = ['name', 'email', 'phone', 'subject', 'message']
         widgets = {
                 'name': forms.TextInput(attrs={
                     'class': 'input-name', 
@@ -19,7 +19,7 @@ class ContactMeForm(forms.ModelForm):
                     'class': 'input-subject', 
                     'placeholder': 'Subject'
                 }),
-                'text': forms.Textarea(attrs={
+                'message': forms.Textarea(attrs={
                     'id': 'text', 
                     'class': 'input-text',
                     'placeholder': 'Enter message..'
