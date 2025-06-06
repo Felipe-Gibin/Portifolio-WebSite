@@ -1,0 +1,48 @@
+{% extends "global/base.html" %}
+{% load template_filters %}
+{% load static %}
+
+
+{% block content %}
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'global/css/pages/email_detail.css' %}">
+    {% endblock extra_css %}
+
+    <div class="email-wraper">
+        <div class="container-email">
+            <div class="field-name">
+                <h1>Email sent by: {{ email.name.title }}</h1>
+            </div>
+
+            <div class="field">
+                <h2>Email:</h2>
+                <p>{{ email.email }}</p>
+            </div>
+
+            <div class="field">
+                {% if email.phone %}
+                    <h2>Phone number:</h2>
+                    <p>{{ email.phone | phone_number_format }}</p>
+                {% endif %}
+            </div>
+
+            <div class="field">
+                <h2>Sent at:</h2>
+                <p>{{ email.created_at|date:"m/d/Y \a\t h:i A" }}</p>
+            </div>
+
+            <div class="field">
+                <h2>Subject:</h2>
+                <p>{{ email.subject }}</p>
+            </div>
+            <div class="field-message">
+                <h2>Message:</h2>
+                    <div class="email-message">  
+                        <p>{{ email.message|linebreaksbr }}</p>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}

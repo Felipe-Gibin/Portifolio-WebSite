@@ -10,7 +10,7 @@ class ContactMeEmail(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(
-        max_length=17,
+        max_length=19,
         validators=[PHONE_NUMBER_VALIDATOR],
         blank=True, null=True)
     subject = models.CharField(max_length=160)

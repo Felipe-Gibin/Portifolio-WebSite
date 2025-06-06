@@ -1,0 +1,81 @@
+{% extends "global/base.html" %}
+{% load template_filters %}
+{% load static %}
+
+
+{% block content %}
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'global/css/pages/email_table.css' %}">
+        <link rel="stylesheet" href="{% static 'global/css/partials/paginator.css' %}">
+    {% endblock extra_css %}
+    <div class='container'>
+        <div class='container-title'>
+            <form method='get'>
+                <h1>Emails - Admin</h1>
+                <a href="{% url 'admin_app:home' %}?switch_state=projects" class="new-register">Home - Admin</a>            
+            </form>
+
+        </div>
+        <div class='register-table-div'>
+        <table class='register-table'>
+            <thead>
+                <tr>
+                    <th class='col-id'><a href="?order_by={% if request.GET.order_by == 'id' %}-id{% else %}id{% endif %}">ID</a></th>
+                    <th class='col-name'><a href="?order_by={% if request.GET.order_by == 'name' %}-name{% else %}name{% endif %}">NAME</a></th>
+                    <th class='col-email'><a href="?order_by={% if request.GET.order_by == 'email' %}-email{% else %}email{% endif %}">EMAIL</th></a>
+                    <th class='col-subject'><a href="?order_by={% if request.GET.order_by == 'subject' %}-subject{% else %}subject{% endif %}">SUBJECT</th></a>
+                    <th class='col-email-send'><a href="?order_by={% if request.GET.order_by == 'email_send' %}-email_send{% else %}email_send{% endif %}">EMAIL SENT</a></th>
+                    <th class='col-created-at'><a href="?order_by={% if request.GET.order_by == 'created_at' %}-created_at{% else %}created_at{% endif %}">CREATED AT</a></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for obj in emails %}
+                    <tr>
+                        <td class='col-id' ><a href="{% url 'admin_app:email_detail' pk=obj.id %}">{{ obj.id }}</a></td>
+                        <td class='col-name' ><a href="{% url 'admin_app:email_detail' pk=obj.id %}">{{ obj.name }}</a></td>
+                        <td class='col-email' ><a href="{% url 'admin_app:email_detail' pk=obj.id %}">{{ obj.email }}</a></td>
+                        <td class="col-subject"><a href="{% url 'admin_app:email_detail' pk=obj.id %}">{{ obj.subject }}</a></td>
+                        <td class='col-email-send' ><input type="checkbox" disabled {% if obj.email_send %}checked{% endif %}></td>
+                        <td class='col-created-at' ><a href="{% url 'admin_app:email_detail' pk=obj.id %}">{{ obj.created_at|date:"m/d/Y" }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+
+        <div class='paginator'>
+            {% if page_obj.has_other_pages %}
+                <ul>
+                    {% if page_obj.has_previous %}
+                    <li><a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}">&lt;&lt;</a></li>
+                    <li><a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&lt;</a>
+                    {% endif %}
+    
+                    <li class='active'><a class='current-page'>
+                        {{ page_obj.number }}
+                    </a></li>
+                    
+                    {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;</a></li>
+                    <li><a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}">&gt;&gt;</a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+
+        {# Pop-up Confirmação #}
+        <div id="confirm-delete-modal" class="modal" style="display:none;">
+            <div class='modal-position'>
+                <div class="modal-content">
+                    <p>Tem certeza que deseja deletar este registro?</p>
+                    <button id="confirm-delete-yes">Sim, deletar</button>
+                    <button id="confirm-delete-no">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+{% endblock content %}

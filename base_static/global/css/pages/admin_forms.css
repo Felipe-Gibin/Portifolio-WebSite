@@ -21,6 +21,9 @@
     box-shadow: var(--shadow-default);
     background-color: var(--background-inner-secondary);
 }
+.container-form h1{
+    align-self: center;
+}
 
 .container-form:hover {
     outline: none;
@@ -198,34 +201,34 @@
 #id_tags input[type="checkbox"], 
 .boolean-fields input[type="checkbox"], 
 .img-field-border input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--border-default);
-  border-radius: 28%;
-  background-color: var(--background-inner);
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  transition: background-color 0.2s ease, border 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-default);
+    border-radius: 28%;
+    background-color: var(--background-inner);
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border 0.2s ease;
 }
 #id_tags input[type="checkbox"]:checked, 
 .boolean-fields input[type="checkbox"]:checked, 
 .img-field-border input[type="checkbox"]:checked {
-  background-color: var(--secondary-color);
-  border-color: var(--border-highlight);
+    background-color: var(--secondary-color);
+    border-color: var(--border-highlight);
 }
 #id_tags input[type="checkbox"]:checked::after, 
 .boolean-fields input[type="checkbox"]:checked::after, 
 .img-field-border input[type="checkbox"]:checked::after {
-  content: '✔';
-  position: absolute;
-  font-size: var(--medium-font);
-  color: var(--text-inverted);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    content: '✔';
+    position: absolute;
+    font-size: var(--medium-font);
+    color: var(--text-inverted);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Config botoes */

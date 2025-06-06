@@ -23,8 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnNo = document.getElementById('confirm-delete-no');
     let deleteUrl = '';
 
-    // Para todos os botões da tabela, adicione o evento de click
-    // Ao clicar, pega o 'data-url' do botão
     document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', (e) => {
         e.preventDefault();

@@ -8,8 +8,8 @@
         <script src="{% static 'global/js/forms/char_counter.js' %}"></script>
     {% endblock extra_css %}
     <div class='container-form-proj'>
-        <h1>Tag: {{ tag.name }}</h1>
         <div class="container-form">
+            <h1>Tag: {{ tags.name }}</h1>
             <form method='post' enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="field">

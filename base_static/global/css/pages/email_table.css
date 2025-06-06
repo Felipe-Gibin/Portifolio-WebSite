@@ -112,20 +112,6 @@
     color: inherit;
 }
 
-/* Botão para deletar */
-.register-table .btn-delete {
-    border: 2px solid var(--black-purple);
-    border-radius: 10px;
-    width: 80%;
-    box-shadow: 2px 3px 6px var(--black-purple);
-    background-color: var(--soft-red-light);
-    text-align: center;
-}
-.register-table .btn-delete:hover {
-    background-color: var(--soft-red-dark);
-    transform: scale(1.01);
-}
-
 
 /* Tabela - definir larguras */
 .register-table .col-id {
@@ -138,63 +124,7 @@
     width: 20%;
 }
 
-.col-img-icon img {
-    height: inherit;
-    width: 40px;
-}
-
-/* Pop-up de confirmação */
-.modal {
-    display: flex;
-    position: fixed;
-    z-index: 1000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    align-items: center;
-    justify-content: center;
-    font-size: var(--bigger-font);
-    color: inherit;
-}
-.modal-content {
-    background: var(--background-inner);
-    border: 3px solid var(--soft-red-light);
-    box-shadow: var(--shadow-default);
-    padding: 20px;
-    border-radius: 14px;
-    max-width: 400px;
-    text-align: center;
-}
-.modal-content:hover {
-    outline: none;
-    border: 3px solid var(--soft-red-dark);
-    box-shadow: var(--shadow-elevated);
-}
-.modal-content button {
-    margin: 12px;
-    padding: 8px 16px;
-    border-radius: 10px;
-    border: 2px solid var(--border-default);
-    box-shadow: var(--shadow-default);
-    background-color: var(--dark-primary-color);
-    color: var(--text-primary);
-}
-.modal-content button:hover {
-    transform: scale(1.02);
-    outline: none;
-    border-color: var(--border-highlight);
-    box-shadow: var(--shadow-elevated);
-}
-#confirm-delete-yes:hover {
-    background-color: var(--warning-red);
-}
-#confirm-delete-no:hover {
-    background-color: var(--darker-primary-color);
-
-}
-
-.col-visibility input[type="checkbox"], 
-.col-featured input[type="checkbox"] {
+.col-email-send input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     width: 20px;
@@ -206,13 +136,12 @@
     position: relative;
     transition: background-color 0.2s ease, border 0.2s ease;
 }
-.col-visibility input[type="checkbox"]:checked,
-.col-featured input[type="checkbox"]:checked {
+
+.col-email-send input[type="checkbox"]:checked {
     background-color: var(--secondary-color);
     border-color: var(--border-highlight);
 }
-.col-visibility input[type="checkbox"]:checked::after,
-.col-featured input[type="checkbox"]:checked::after {
+.col-email-send input[type="checkbox"]:checked::after {
     content: '✔';
     position: absolute;
     font-size: var(--medium-font);

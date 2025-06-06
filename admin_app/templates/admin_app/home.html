@@ -15,11 +15,13 @@
                 {% if switch_state == 'projects' %}
                     <h1>{{ switch_state.title }} - Admin</h1>
                     <button type='submit' name='switch_state' value='tags'>Switch to Tags</button>
+                    <a href="{% url 'admin_app:email_table' %}" class="new-register">Emails</a>
                     <a href="{% url 'admin_app:project_new' %}" class="new-register">New Project</a>
                     
                 {% else %}
                     <h1>{{ switch_state.title }} - Admin</h1>
                     <button type='submit' name='switch_state' value='projects'>Switch to Projects</button>
+                    <a href="{% url 'admin_app:email_table' %}" class="new-register">Emails</a>
                     <a href="{% url 'admin_app:tag_new' %}" class="new-register">New Tag</a>
                     
                 {% endif %}
@@ -46,34 +48,34 @@
 
             <tbody>
                 {% for obj in objects %}
-                {% if switch_state == 'projects' %}
-                    {% url 'admin_app:project_edit' slug=obj.slug as edit_url %}
-                    {% url 'admin_app:project_delete' slug=obj.slug as delete_url %}
-                {% else %}
-                    {% url 'admin_app:tag_edit' slug=obj.slug as edit_url %}
-                    {% url 'admin_app:tag_delete' slug=obj.slug as delete_url %}
-                {% endif %}
-                <tr>
-                    <td class='col-id' ><a href="{{ edit_url }}">{{ obj.id }}</a></td>
-                    <td class='col-name' ><a href="{{ edit_url }}">{{ obj.name }}</a></td>
-                    <td class='col-updated-at' ><a href="{{ edit_url }}">{{ obj.updated_at|date:"d/m/Y" }}</a></td>
-                    {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{{ edit_url }}"><img src="{{ obj.img_icon | img_or_default }}" alt="{{ obj.name }}"></a></td>{% endif %}
                     {% if switch_state == 'projects' %}
-                        <td class='col-visibility' >
-                            <form method="post" action="{% url 'admin_app:toggle_boolean' obj.pk 'visibility' %}">
-                                {% csrf_token %}
-                                <input type="checkbox" name="value" onchange="this.form.submit()" {% if obj.visibility %}checked{% endif %}>
-                            </form>
-                        </td>
-                        <td class='col-featured' >
-                            <form method="post" action="{% url 'admin_app:toggle_boolean' obj.pk 'featured' %}">
-                                {% csrf_token %}
-                                <input type="checkbox" name="value" onchange="this.form.submit()" {% if obj.featured %}checked{% endif %}>
-                            </form>
-                        </td>
+                        {% url 'admin_app:project_edit' slug=obj.slug as edit_url %}
+                        {% url 'admin_app:project_delete' slug=obj.slug as delete_url %}
+                    {% else %}
+                        {% url 'admin_app:tag_edit' slug=obj.slug as edit_url %}
+                        {% url 'admin_app:tag_delete' slug=obj.slug as delete_url %}
                     {% endif %}
-                    <td class="col-delete"><a href="#" class="btn-delete" data-url="{{ delete_url }}">Delete</a></td>
-                </tr>
+                    <tr>
+                        <td class='col-id' ><a href="{{ edit_url }}">{{ obj.id }}</a></td>
+                        <td class='col-name' ><a href="{{ edit_url }}">{{ obj.name }}</a></td>
+                        <td class='col-updated-at' ><a href="{{ edit_url }}">{{ obj.updated_at|date:"m/d/Y" }}</a></td>
+                        {% if switch_state == 'tags' %}<td class='col-img-icon' ><a href="{{ edit_url }}"><img src="{{ obj.img_icon | img_or_default }}" alt="{{ obj.name }}"></a></td>{% endif %}
+                        {% if switch_state == 'projects' %}
+                            <td class='col-visibility' >
+                                <form method="post" action="{% url 'admin_app:toggle_boolean' obj.pk 'visibility' %}">
+                                    {% csrf_token %}
+                                    <input type="checkbox" name="value" onchange="this.form.submit()" {% if obj.visibility %}checked{% endif %}>
+                                </form>
+                            </td>
+                            <td class='col-featured' >
+                                <form method="post" action="{% url 'admin_app:toggle_boolean' obj.pk 'featured' %}">
+                                    {% csrf_token %}
+                                    <input type="checkbox" name="value" onchange="this.form.submit()" {% if obj.featured %}checked{% endif %}>
+                                </form>
+                            </td>
+                        {% endif %}
+                        <td class="col-delete"><a href="#" class="btn-delete" data-url="{{ delete_url }}">Delete</a></td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>

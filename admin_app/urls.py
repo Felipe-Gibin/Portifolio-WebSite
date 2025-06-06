@@ -8,6 +8,9 @@ urlpatterns = [
     path('logout/', views.CustomLogoutView.as_view(), name='logout'),
     path('protected/', views.MyAdminHome.as_view(), name='home'),
     
+    path('protected/emails/', views.SentEmailsView.as_view(), name='email_table'),
+    path('protected/email/<int:pk>/', views.SentEmailDetailView.as_view(), name='email_detail'),
+    
     path('protected/project/new/', views.ProjectAdd.as_view(), name='project_new'),
     path('protected/project/<slug:slug>/', views.ProjectEdit.as_view(), name='project_edit'),
     path('protected/project/<slug:slug>/delete/', views.ProjectDelete.as_view(), name='project_delete'),

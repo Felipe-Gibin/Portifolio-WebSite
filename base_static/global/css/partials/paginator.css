@@ -17,7 +17,7 @@
 /* Config links da paginação */
 .paginator a{
     text-decoration: none;
-    color: var(--black-purple);
+    color: var(--lighter-secondary-color);
     padding: 1rem;
     display: inline-flex;
     align-items: center;

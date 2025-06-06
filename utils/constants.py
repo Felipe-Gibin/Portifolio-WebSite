@@ -7,8 +7,8 @@ MEDIA_PROJECT = BASE_DIR_MEDIA / 'project'
 MEDIA_TAG = BASE_DIR_MEDIA / 'tag'
 
 PHONE_NUMBER_VALIDATOR = RegexValidator(
-    regex=r'^\d{12,13}$',
-    message='Digite apenas os números: código do país + DDD + número (ex: 5511999998888)'
+    regex=r'^\d{10,15}$',
+    message='Type between 10 and 15 digits.',
 )
 
 if __name__ == '__main__':
