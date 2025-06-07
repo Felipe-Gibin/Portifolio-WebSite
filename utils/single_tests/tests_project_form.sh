@@ -1,6 +1,5 @@
 #!/bin/sh
-cd ..
-cd ..
+cd "$(dirname "$0")/../.."
 
 source venv/Scripts/activate
 
