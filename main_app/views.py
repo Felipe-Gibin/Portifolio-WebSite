@@ -1,37 +1,32 @@
 from typing import Any
-from django.shortcuts import render
-from django.views import View
-from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, ListView, FormView
-from projects_app.models import Project, Tags
-from .forms import ContactMeForm
+from django.views.generic import ListView, FormView
+from projects_app.models import ProjectModel, TagModel
+from .forms import SendEmailForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
 
-class Home(ListView):
-    model = Project
+# Main application views for the portfolio website
+class MainHomeView(ListView):
+    model = ProjectModel
     template_name = 'main_app/home.html'
     context_object_name = "projects"
 
+    # Customizing the queryset to filter projects that are visible and featured
     def get_queryset(self):
         queryset = super().get_queryset()
-        
         queryset = queryset.filter(visibility=True, featured=True)
-        
-        
         return queryset
     
-
+    # Customizing the context data to include additional information
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         project_tags_list = {}
         
         context["cargo"] = 'Python Developer | Data Scientist'
-        context["tags"] = Tags.objects.all()
+        context["tags"] = TagModel.objects.all()
         
         if context.get('projects'):
             for project in context['projects']:
@@ -41,23 +36,25 @@ class Home(ListView):
         context["custom_tags_list"] = project_tags_list
         return context
 
-class AboutMe(FormView):
+# View for the "About Me" page, which includes a contact form
+class AboutMeView(FormView):
     template_name = 'main_app/about_me.html'
-    form_class = ContactMeForm
+    form_class = SendEmailForm
     success_url = reverse_lazy('main_app:about_me')
     
+    # Method to get the context data for the template, including the form
     def form_valid(self, form):
         response = super().form_valid(form)
         contact = form.save(commit=False)
         
-        # Dados do formulário
+        # Capturing form data
         name = form.cleaned_data.get('name')
         email = form.cleaned_data.get('email')
         phone = form.cleaned_data.get('phone', 'N/A')
         subject = form.cleaned_data.get('subject')
         message = form.cleaned_data.get('message')
         
-        # Gerar corpo do e-mail via template HTML
+        # Preparing the email content
         context = {
             'name': name,
             'email': email,
@@ -67,6 +64,7 @@ class AboutMe(FormView):
         }
         html_content = render_to_string('global/emails/contact_message.html', context)
         
+        # Sending the email using Django's EmailMultiAlternatives
         try:
             email_message = EmailMultiAlternatives(
                 subject=subject,
@@ -88,6 +86,7 @@ class AboutMe(FormView):
         contact.save()
         return response
     
+    # Method to handle form submission when the form is invalid
     def form_invalid(self, form):
         messages.error(self.request, "Error submitting form. Check required fields.")
         return super().form_invalid(form)

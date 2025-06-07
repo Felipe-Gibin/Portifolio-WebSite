@@ -103,7 +103,7 @@
     justify-content: center;
     margin: 5px;
     padding: 8px;
-    background-color: var(--login-error);
+    background-color: var(--soft-red-dark);
     font-size: var(--medium-font);
     margin-top: 5px;
     border: 1px solid black;

@@ -1,6 +1,7 @@
 from django.http import HttpResponseForbidden
 from decouple import config
 
+# Middleware to block access to the admin panel based on IP addresses
 class IPAdminBlockerMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response

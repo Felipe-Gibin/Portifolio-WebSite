@@ -1,19 +1,41 @@
 from django import forms
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import AuthenticationForm
-from projects_app.models import Project, Tags
+from projects_app.models import ProjectModel, TagModel
 
-class CustomLoginForm(AuthenticationForm):
+# Custom authentication form for user login
+class CustomMyAdminLoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
     
     error_messages = {
-        'invalid_login': "Usuário ou senha incorretos. Tente novamente.",
+        'invalid_login': "Username or password is incorrect.",
     }
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
     
+    # Customizing the form fields to automatically handle the request and authenticate the user
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        if username and password:
+            self.user_cache = authenticate(self.request, username=username, password=password)
+            if self.user_cache is None:
+                raise forms.ValidationError(
+                    self.error_messages['invalid_login'],
+                    code='invalid_login',
+                )
+        return self.cleaned_data
+    
+    # Method to get the authenticated user from the form
+    def get_user(self):
+        return getattr(self, 'user_cache', None)
+
+# Form for creating or updating a project    
 class ProjectForm(forms.ModelForm):
     class Meta:
-        model = Project
+        model = ProjectModel
         fields = ['name', 'short_desc', 'long_desc', 'img_icon', 'tags', 'visibility', 'featured']
         widgets = {
             'name': forms.TextInput(attrs={
@@ -34,10 +56,11 @@ class ProjectForm(forms.ModelForm):
             }),
             'tags': forms.CheckboxSelectMultiple(),
         }
-        
+
+# Form for creating or updating a tag        
 class TagsForm(forms.ModelForm):
     class Meta:
-        model = Tags
+        model = TagModel
         fields = ['name', 'short_desc', 'long_desc', 'img_icon']
         widgets = {
             'name': forms.TextInput(attrs={

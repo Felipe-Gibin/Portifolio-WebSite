@@ -1,8 +1,8 @@
-from typing import Iterable
 from django.db import models
 from utils.constants import PHONE_NUMBER_VALIDATOR
 
-class ContactMeEmail(models.Model):
+# Django model for storing email contact information
+class EmailModel(models.Model):
     class Meta:
         verbose_name = 'Email'
         verbose_name_plural = 'Email\'s'

@@ -1,11 +1,6 @@
 {% load template_filters %}
 {% load static %}
 
-{% comment %}
-    <a href="{% url 'projects_app:project_detail' slug=project.slug %}" class="select-project"></a>
-                        
-{% endcomment %}
-
 <div class='card-container'>
     <ul class= 'cards'>
         {% for project in projects %}

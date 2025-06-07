@@ -2,17 +2,20 @@ from django import template
 
 register = template.Library()
 
+# Custom template filter for getting items from a dictionary
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
 
+# Custom template filter for formatting image URLs or returning a default image URL
 @register.filter
 def img_or_default(imagem, fallback_url='/media/defaults/image_not_found_placeholder.jpg'):
     try:
         return imagem.url
     except ValueError:
         return fallback_url
-    
+
+# Custom template filter for formatting phone numbers
 @register.filter
 def phone_number_format(phone):
     ddi = phone[:3].zfill(3)

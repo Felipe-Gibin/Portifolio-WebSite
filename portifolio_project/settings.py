@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -9,18 +10,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# Configure Secret Key in .env file
 SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+
 # NOTE: DEBUG = TRUE
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 # NOTE: Configurar ALLOWED_HOSTS
 ALLOWED_HOSTS = ['*']
 
-# Email Config
-
+# Configure email settings in .env file
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
@@ -29,9 +29,49 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
+# Configure Axes settings
+AXES_FAILURE_LIMIT = 3  
+AXES_COOLOFF_TIME = timedelta(minutes=5)
+AXES_ONLY_USER_ATTEMPTS = True
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'axes.backends.AxesBackend',
+]
+
+
+# Configure session settings
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True  
+    CSRF_COOKIE_SECURE = True     
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000 
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'DENY'
+
+# Configure session timeout settings
+SESSION_EXPIRE_SECONDS = 240  # 4 minutes
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_TIMEOUT_REDIRECT = '/'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Configure CAPTCHA settings
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
+CAPTCHA_LENGTH = 6
+CAPTCHA_IMAGE_SIZE = (280, 80) # Width, Height
+CAPTCHA_NOISE_FUNCTIONS = (
+    'captcha.helpers.noise_arcs',
+    'captcha.helpers.noise_dots',
+    'captcha.helpers.noise_spots',
+)
+CAPTCHA_FONT_SIZE = 48
+
+
+# NOTE = Set to True for testing purposes, but should be False in production
+CAPTCHA_TEST_MODE = False
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,8 +83,12 @@ INSTALLED_APPS = [
     'main_app',
     'projects_app',
     'admin_app',
+    'axes',
+    'captcha',
+    'django_session_timeout',
 ]
 
+# Middleware definition
 MIDDLEWARE = [
     'admin_app.middleware.IPAdminBlockerMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +99,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    'axes.middleware.AxesMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'portifolio_project.urls'
@@ -75,14 +121,14 @@ TEMPLATES = [
     },
 ]
 
-# TODO: Verificar WSGI/ASGI
+# WSGI application
 WSGI_APPLICATION = 'portifolio_project.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# FIXME: Trocar Banco de dados
+# FIXME: Change the database settings to use PostgreSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -109,22 +155,42 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Configure Logging of login attempts
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs/django.log',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-BR'
+LANGUAGE_CODE = config('LANGUAGE_CODE')
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = config('TIME_ZONE')
 
-USE_I18N = True
+USE_I18N = config('USE_I18N', cast=bool)
 
-USE_TZ = True
+USE_TZ = config('USE_TZ', cast=bool)
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+# Configure static and media files urls and directories
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 
