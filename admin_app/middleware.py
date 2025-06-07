@@ -5,7 +5,7 @@ from decouple import config
 class IPAdminBlockerMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.allowed_ips = config('ALLOWED_IP_ADMIN')
+        self.allowed_ips = [ip.strip() for ip in config('ALLOWED_IP_ADMIN').split(',')]
 
     def __call__(self, request):
         if request.path.startswith('/admin/'):

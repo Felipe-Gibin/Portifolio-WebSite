@@ -9,7 +9,7 @@ def get_item(dictionary, key):
 
 # Custom template filter for formatting image URLs or returning a default image URL
 @register.filter
-def img_or_default(imagem, fallback_url='/media/defaults/image_not_found_placeholder.jpg'):
+def img_or_default(imagem, fallback_url='/static/global/images/image_not_found_placeholder.jpg'):
     if not imagem:
         return fallback_url
     try:

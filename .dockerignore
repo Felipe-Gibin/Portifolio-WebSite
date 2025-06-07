@@ -1,0 +1,45 @@
+# Virtual Environments
+venv/
+env/
+ENV/
+*/venv/
+*/env/
+*/ENV/
+
+# Logs
+logs/
+*.log
+
+# VS Code
+.vscode/
+
+# Databases
+db.sqlite3
+*.sqlite3
+*.db
+
+# Sensitive files
+.env
+.env*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.eggs/
+*.pytest_cache/
+.tox/
+.coverage
+*.cover
+htmlcov/
+.mypy_cache/
+.dmypy.json
+.ipynb_checkpoints/
+
+# Django
+static/
+media/
+localsettings.py
+migrations/**/pycache/
+**/__pycache__/

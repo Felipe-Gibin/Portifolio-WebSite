@@ -19,9 +19,14 @@ NUMBER_OF_PROJECTS = 50
 NUMBER_OF_TAGS = 15
 NUMBER_OF_T_IN_P = 7
 
+# NOTE: Set to True if you want to inject images into the projects and tags
+WITH_IMG = False
+
 # Define the path to the images for injection
 # Assuming the images are stored in a directory named 'images_for_injection' inside the 'media' directory
-IMG_PATHS = DJANGO_BASE_DIR / 'media' / 'images_for_injection'
+
+if WITH_IMG::
+    IMG_PATHS = DJANGO_BASE_DIR / 'media' / 'images_for_injection'
 
 settings.USE_TZ = False
 
@@ -55,8 +60,10 @@ if __name__ == '__main__':
         {"name": "MongoDB", "img_path": 'mongodb.png'},
         {"name": "Docker", "img_path": 'docker.png'},
     ]
-    # Assuming you have 50 project icons in the media/images_for_injection directory
-    proj_images = [f'free_img_{i}.jpg' for i in range(50)] 
+    
+    if WITH_IMG:
+        # Assuming you have 50 project icons in the media/images_for_injection directory
+        proj_images = [f'free_img_{i}.jpg' for i in range(50)] 
 
     # Create tags
     print("Creating tags...")
@@ -94,24 +101,25 @@ if __name__ == '__main__':
         
     print("Projects created successfully.")
     
-    # Assign random icons to TagModel instances
-    print("Assigning icons to tags...")
-    for tag, tag_info in zip(TagModel.objects.all(), tag_data):
-        img_path = IMG_PATHS / tag_info['img_path']
-        if img_path.exists():
-            with open(img_path, 'rb') as img_file:
-                tag.img_icon = File(img_file, name=img_path.name) # type: ignore
-                tag.save()
-    print("Icons assigned to tags successfully.")
-    # Assign random images to ProjectModel instances
-    print("Assigning images to projects...")
-    for project in ProjectModel.objects.all():
-        img_path = IMG_PATHS / choice(proj_images)
-        if img_path.exists():
-            with open(img_path, 'rb') as img_file:
-                project.img_icon = File(img_file, name=img_path.name)# type: ignore
-                project.save()
-    
-    print("Images assigned to projects successfully.")
+    if WITH_IMG:
+        # Assign random icons to TagModel instances
+        print("Assigning icons to tags...")
+        for tag, tag_info in zip(TagModel.objects.all(), tag_data):
+            img_path = IMG_PATHS / tag_info['img_path']
+            if img_path.exists():
+                with open(img_path, 'rb') as img_file:
+                    tag.img_icon = File(img_file, name=img_path.name) # type: ignore
+                    tag.save()
+        print("Icons assigned to tags successfully.")
+        # Assign random images to ProjectModel instances
+        print("Assigning images to projects...")
+        for project in ProjectModel.objects.all():
+            img_path = IMG_PATHS / choice(proj_images)
+            if img_path.exists():
+                with open(img_path, 'rb') as img_file:
+                    project.img_icon = File(img_file, name=img_path.name)# type: ignore
+                    project.save()
+        
+        print("Images assigned to projects successfully.")
     
     print("Data injection completed successfully.")

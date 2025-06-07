@@ -1,17 +1,19 @@
-pensamentos/
+# General folders and files
 logs/
+pensamentos/
+.vscode/
+.DS_Store
+Thumbs.db
 
-
-# ASP.NET
+# ASP.NET / MAUI.NET
 bin/
 obj/
 .vs/
-.vscode/
-# Arquivos de configuração do IIS (caso aplicável)
 IISExpress/
-# Logs
-*.log
-# Arquivos de configuração do usuário
+*.userprefs
+*.vsconfig
+
+# User configuration files
 appsettings.Development.json
 appsettings.Local.json
 secrets.json
@@ -19,15 +21,11 @@ secrets.json
 # MAUI.NET
 /bin/
 /obj/
-*.userprefs
-*.vsconfig
-.vscode/
 *.db
 *.bak
 *.tmp
 
-# Android Studio
-# Android Studio e Gradle
+# Android Studio and Gradle
 .gradle/
 .idea/
 build/
@@ -35,17 +33,15 @@ local.properties
 *.iml
 *.apk
 *.ap_
-# Arquivos do NDK
 .ndk/
-# Arquivos de configuração local
 *.keystore
 *.jks
 *.p12
-*.env
 *.properties
 
 # Python
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 .Python
@@ -60,18 +56,17 @@ ENV/
 *.cover
 htmlcov/
 .mypy_cache/
-.pytest_cache/
 .dmypy.json
 .ipynb_checkpoints/
 
 # Django
 static/
+media/
 localsettings.py
 db.sqlite3
+*.sqlite
 *.sqlite3
 migrations/**/pycache/
-**/__pycache__/
-media/
 
 # PySide6
 *.qmlc
@@ -85,16 +80,9 @@ media/
 *.sql.gz
 *.sql.bak
 
-# SQLite3
-*.sqlite
-*.sqlite3
-
-# Arquivos de configuração do sistema operacional
-.DS_Store
-Thumbs.db
-
-# Dados sensíveis
+# Sensitive data
 *.env
+*.env*
 *.secrets
 *.key
 *.pem
