@@ -1,3 +1,6 @@
+/* Global styles for email detail page */
+
+/* Main container */
 .email-wraper {
     display: flex;
     flex: 1;
@@ -23,29 +26,26 @@
     box-shadow: var(--shadow-default);
     background-color: var(--background-inner-secondary);
 }
-
 .container-email:hover, .email-message:hover {
     outline: none;
     border-color: var(--border-highlight);
     box-shadow: var(--shadow-elevated); 
 }
-
 .container-email p {
     font-size: var(--bigger-font);
 }
 
+/* Styles for the fields in the email */
 .field-name {
     display: flex;
     justify-content: center;
     margin: 12px;
 }
-
 .field-message {
     display: flex;
     flex-direction: column;
     overflow: auto;
 }
-
 .email-message {
     flex-wrap: wrap;
     overflow: auto;
@@ -58,7 +58,6 @@
     box-sizing: border-box;
     color: var(--text-secondary);
 }
-
 .email-message::-webkit-scrollbar {
     width: 14px;
 }

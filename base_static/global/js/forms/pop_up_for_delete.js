@@ -1,3 +1,5 @@
+// File for managing the pop-up confirmation for deleting records in a web application.
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -16,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return cookieValue;
     }
 
-    // ------------------------------------------------------
-    // Pop-up de confirmação de exclusao de registro
     const modal = document.getElementById('confirm-delete-modal');
     const btnYes = document.getElementById('confirm-delete-yes');
     const btnNo = document.getElementById('confirm-delete-no');
@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Botão de confirmar a exclusão do registro
     btnYes.addEventListener('click', () => {
         fetch(deleteUrl, {
             method: 'POST',
@@ -52,13 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteUrl = '';
     });
 
-    // Botão de negar a exclusão do registro
     btnNo.addEventListener('click', () => {
         modal.style.display = 'none';
         deleteUrl = '';
     });
 
-    // Fecha modal se clicar fora da área do conteúdo
     window.addEventListener('click', (e) => {
         if (e.target == modal) {
         modal.style.display = 'none';

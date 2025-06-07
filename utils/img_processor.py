@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import BinaryIO
 from PIL import Image
 from pathlib import Path
 from io import BytesIO
@@ -45,7 +46,7 @@ def resize_image(image_obj: Image.Image) -> Image.Image:
     return img
     
 # Function to process an image file, resizing it and returning a ContentFile
-def process_img(image_obj: File, name: str) -> ContentFile:
+def process_img(image_obj: File , name: str) -> ContentFile:
     img = Image.open(image_obj)
     
     resize_image(img)

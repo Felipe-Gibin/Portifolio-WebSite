@@ -10,10 +10,14 @@ def get_item(dictionary, key):
 # Custom template filter for formatting image URLs or returning a default image URL
 @register.filter
 def img_or_default(imagem, fallback_url='/media/defaults/image_not_found_placeholder.jpg'):
-    try:
-        return imagem.url
-    except ValueError:
+    if not imagem:
         return fallback_url
+    try:
+        if hasattr(imagem, 'url') and imagem.name:
+            return imagem.url
+    except Exception:
+        pass
+    return fallback_url
 
 # Custom template filter for formatting phone numbers
 @register.filter

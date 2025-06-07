@@ -1,3 +1,6 @@
+/* Container for sendindg email */
+
+/* main container */
 .container-contact{
     display: flex;
     flex-direction: column;
@@ -16,7 +19,17 @@
 .container-contact h1 {
     font-size: var(--biggest-font);
 }
+.container-contact:hover {
+    outline: none;
+    border-color: var(--border-highlight);
+    box-shadow: var(--shadow-elevated);
+}
+.container-contact::placeholder {
+    font-style: italic;
+    color: var(--placeholder-color);
+}
 
+/* form style */
 .container-contact form {
     font-size: var(--big-font);
     display: flex;
@@ -27,6 +40,7 @@
     padding: 8px;
 }
 
+/* input and textarea styles */
 .container-contact input, textarea {
     background-color: var(--background-inner);
     width: 100%;
@@ -36,12 +50,15 @@
     box-sizing: border-box;
     color: var(--text-secondary);
 }
-
+.input-text {
+    min-height: 160px;
+}
 .container-contact input:focus, .input-text:focus {
     outline: none;
     border-color: var(--border-highlight);
 }
 
+/* scrollbar for the textarea */
 .container-contact textarea::-webkit-scrollbar {
     width: 14px;
 }
@@ -52,34 +69,32 @@
     border-radius: 5px;
 }
 
-.container-contact:hover {
-    outline: none;
-    border-color: var(--border-highlight);
-    box-shadow: var(--shadow-elevated);
-}
-
-.container-contact::placeholder {
-    font-style: italic;
-    color: var(--placeholder-color);
-}
-
-.input-text {
-    min-height: 160px;
-}
-
+/* field styles */
 .field {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 6px;
 }
-
 .fields {
     display: flex;
     gap: 30px;
 }
 
-/* Config botoes */
+/* captcha styles */
+.field img {
+    width: 280px;
+    height: 80px;
+    image-rendering: auto;
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    border-radius: 12px;
+    box-shadow: var(--shadow-default);
+    margin: 0 auto;
+    display: block;
+}
+
+/* button styles */
 .container-contact button {
     font-size: var(--big-font);
     padding: 10px;
@@ -99,14 +114,3 @@
 }
 
 
-.field img {
-    width: 280px;
-    height: 80px;
-    image-rendering: auto;
-    image-rendering: crisp-edges;
-    image-rendering: -webkit-optimize-contrast;
-    border-radius: 12px;
-    box-shadow: var(--shadow-default);
-    margin: 0 auto;
-    display: block;
-}

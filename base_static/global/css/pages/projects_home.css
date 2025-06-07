@@ -1,3 +1,6 @@
+/* Global styles for the projects home page */
+
+/* Main container */
 .container {
     display: flex;
     position: relative;
@@ -10,7 +13,7 @@
     padding: 30px;
 }
 
-/* Filtro dos projetos, colapsável */
+/* Filter container */
 .container details {
     position: absolute;
     font-size: var(--biggest-font);
@@ -20,7 +23,7 @@
     z-index: 1;
 }
 
-/* Botão do filtro de projetos */
+/* Filter button */
 .container button {
     background-color: var(--lighter-tertiary-color);
     border: 1px solid black;

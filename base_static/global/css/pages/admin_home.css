@@ -1,4 +1,6 @@
-/* Container principal */
+/* Global styles for the admin home page */
+
+/* Main container */
 .container {
     display: flex;
     flex-direction: column;
@@ -8,7 +10,7 @@
     color: inherit;
 }
 
-/* Container titulo */
+/* Title container */
 .container-title form{
     display: flex;
     flex-direction: column;
@@ -36,7 +38,7 @@
     transform: scale(1.02);
 }
 
-/* Tabela */
+/* Table container */
 .register-table-div {
     display: flex;
     flex-direction: column;
@@ -61,13 +63,13 @@
     color: var(--text-inverted);
 }
 
-/* Tabela - cabeçalho */
+/* Table header */
 .register-table th{
     background-color: var(--secondary-color);
     font-size: var(--bigger-font);
 }
 
-/* Tabela - registros */
+/* Table body */
 .register-table tr{
     font-size: var(--medium-font);
 }
@@ -82,7 +84,6 @@
 }
 
 
-/* Tabela - registros */
 .register-table td {
     border-bottom: 1px solid var(--gray);
     height: 40px;
@@ -90,7 +91,6 @@
     padding: 8px;
 }
 
-/* Tabela - cabeçalho */
 .register-table th {
     border-bottom: 1px solid var(--gray);
     height: 20px;
@@ -98,7 +98,6 @@
     padding: 8px;
 }
 
-/* Tabela - links */
 .register-table thead a {
     text-decoration: none;
     color: inherit;
@@ -112,7 +111,7 @@
     color: inherit;
 }
 
-/* Botão para deletar */
+/* Styles for the buttons in the table */
 .register-table .btn-delete {
     border: 2px solid var(--black-purple);
     border-radius: 10px;
@@ -126,8 +125,7 @@
     transform: scale(1.01);
 }
 
-
-/* Tabela - definir larguras */
+/* Styles for the image icon in the table */
 .register-table .col-id {
     width: 5%;
 }
@@ -143,7 +141,7 @@
     width: 40px;
 }
 
-/* Pop-up de confirmação */
+/* Styles for confirmation pop-up modal */
 .modal {
     display: flex;
     position: fixed;
@@ -193,6 +191,7 @@
 
 }
 
+/* Styles for the visibility and featured columns */
 .col-visibility input[type="checkbox"], 
 .col-featured input[type="checkbox"] {
     appearance: none;

@@ -1,3 +1,7 @@
+/* Global styles for admin forms */
+/* This file contains styles for the admin forms, including project and tag forms */
+
+/* Main container for the form */
 .container-form-proj {
     display: flex;
     width: inherit;
@@ -8,6 +12,7 @@
     font-size: var(--bigger-font);
 }
 
+/* Form container */
 .container-form {
     display: flex;
     flex-direction: column;
@@ -24,19 +29,17 @@
 .container-form h1{
     align-self: center;
 }
-
 .container-form:hover {
     outline: none;
     border-color: var(--border-highlight);
     box-shadow: var(--shadow-elevated);
 }
-
 .container-form::placeholder {
     font-style: italic;
     color: var(--placeholder-color);
 }
 
-/* Container do formulario */
+
 .container-form form {
     font-size: var(--big-font);
     display: flex;
@@ -48,7 +51,7 @@
     padding: 8px;
 }
 
-/* Entrada do nome */
+/* Styles for the input and textarea fields */
 .container-form input, textarea {
     background-color: var(--background-inner);
     width: 100%;
@@ -65,7 +68,8 @@
     min-height: 400px;
 }
 
-/* Config do foco nas entradas */
+
+/* Styles for the input and textarea fields on focus and hover */
 .input-short-desc:focus, 
 .input-long-desc:focus, 
 .input-name:focus, 
@@ -78,7 +82,7 @@
     border-color: var(--border-highlight);
 }
 
-/* Estilo da scrollbar pelo WebKit */
+/* Styles for the scrollbars of the textarea fields */
 .input-short-desc::-webkit-scrollbar, .input-long-desc::-webkit-scrollbar {
     width: 8px;
 }
@@ -87,7 +91,7 @@
     border-radius: 5px;
 }
 
-/* Contadores de caracteres */
+/* Styles for the character counters */
 #counter-long, #counter-short {
     font-size: var(--medium-font);
     text-align: right;
@@ -102,6 +106,7 @@
     gap: 6px;
 }
 
+/* Styles for the image field */
 .img-field-border {
     display: flex;
     flex-direction: column;
@@ -114,16 +119,13 @@
     box-shadow: var(--shadow-default);
     background-color: var(--background-inner);
 }
-
 .img-field {
     padding: 5px;
     width: 100%;
 }
-
 .img-field a {
     color: var(--text-tertiary);
 }
-
 .input-img {
     display: none;
 }
@@ -143,6 +145,7 @@
     cursor: pointer;
 }
 
+/* Styles for the button to manage images */
 .img-new-field button {
     font-size: var(--big-font);
     padding: 10px;
@@ -160,6 +163,8 @@
     border-color: var(--border-highlight);
     box-shadow: var(--shadow-elevated);
 }
+
+/* Styles for the image field text */
 .img-new-field span {
     font-size: var(--big-font);
     padding: 8px;
@@ -170,7 +175,7 @@
     display: block;
 }
 
-/* Config Tags checkbox */
+/* Styles for the tags field */
 .tags-field {
     display: flex;
     flex-direction: column;
@@ -178,6 +183,7 @@
     gap: 6px;
 }
 
+/* Styles for the icheckbox and labels for tags */
 #id_tags {
     display: flex;
     gap: 20px;
@@ -197,7 +203,8 @@
     gap: 3px;
     padding: 2px;
 }
-/* Checkbox */
+
+/* Styles for the checkboxes in the tags field */
 #id_tags input[type="checkbox"], 
 .boolean-fields input[type="checkbox"], 
 .img-field-border input[type="checkbox"] {
@@ -231,7 +238,21 @@
     transform: translate(-50%, -50%);
 }
 
-/* Config botoes */
+/* Styles for the boolean fields */
+.boolean-fields {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    border: 2px solid var(--border-default);
+    border-radius: 20px;
+    padding: 4px 12px;
+    transition: border 0.2s ease;
+    box-sizing: border-box;
+    box-shadow: var(--shadow-default);
+    background-color: var(--background-inner);
+}
+
+/* Styles for the confirmation buttons */
 .button-field {
     display: flex;
 }
@@ -251,17 +272,4 @@
     outline: none;
     border-color: var(--border-highlight);
     box-shadow: var(--shadow-elevated);
-}
-
-.boolean-fields {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    border: 2px solid var(--border-default);
-    border-radius: 20px;
-    padding: 4px 12px;
-    transition: border 0.2s ease;
-    box-sizing: border-box;
-    box-shadow: var(--shadow-default);
-    background-color: var(--background-inner);
 }

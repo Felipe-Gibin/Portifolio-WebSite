@@ -1,3 +1,6 @@
+/* Global CSS for Home Page */
+
+/* Main container */
 .container {
     display: flex;
     flex-direction: column;
@@ -5,12 +8,14 @@
     align-items: center;
 }
 
+/* Main text container */
 .text-container {
     margin: 10px;
     text-align: center;
     font-size: var(--biggest-font);
 }
 
+/* Favorite projects container */
 .fav-container {
     display: flex;
     flex-direction: row;

@@ -1,48 +1,49 @@
 import os
 import sys
 from pathlib import Path
-from datetime import datetime
-from pprint import pprint
-from random import randint, sample, choice
-import django
-from django.core.files import File
-from django.conf import settings
 
 DJANGO_BASE_DIR = Path(__file__).parent.parent
+sys.path.append(str(DJANGO_BASE_DIR))
+
+import django
+os.environ['DJANGO_SETTINGS_MODULE'] = 'portifolio_project.settings'
+django.setup()
+
+from projects_app.models import ProjectModel, TagModel
+from random import randint, sample, choice
+from django.core.files import File
+from django.conf import settings
+from utils.img_processor import process_img
+
 NUMBER_OF_PROJECTS = 50
 NUMBER_OF_TAGS = 15
 NUMBER_OF_T_IN_P = 7
 
-sys.path.append(str(DJANGO_BASE_DIR))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
+# Define the path to the images for injection
+# Assuming the images are stored in a directory named 'images_for_injection' inside the 'media' directory
+IMG_PATHS = DJANGO_BASE_DIR / 'media' / 'images_for_injection'
+
 settings.USE_TZ = False
-django.setup()
 
 if __name__ == '__main__':
-    '''
-    CUIDADO!!!!!
-    Apagará todo o banco de dados
-    e injetará dados
-    '''
-    
-    
-    print('\n' * 10)
-    print('--------------INICIANDO--------------')
     import faker
-    from projects_app.models import Project, Tags
-    start = datetime.now()
-    
-    IMG_PATHS = DJANGO_BASE_DIR / 'media' / 'icons_for_injection'
-    
-    print('Apagando DB')
-    Project.objects.all().delete()
-    Tags.objects.all().delete()
-    
+    '''
+    Warning: This script will delete all data in the ProjectModel and TagModel tables.
+    It is intended for development purposes only to inject sample data into the database.
+    '''
+    print("Deleting existing data in ProjectModel and TagModel...")
+    ProjectModel.objects.all().delete()
+    TagModel.objects.all().delete()
+
+
+    # Initialize Faker
     fake = faker.Faker('pt-BR')
-    possible_tags = ['Django', 'Python', 'Pandas', 'Jupiter', 'NETBeans', 'React', 'HTML', 'CSS', 'JS', 'Java', 'MongoDB', 'Docker']
+    
+    # Generate fake data for tags and projects
+    # Define the tag data with names and image paths
     tag_data = [
-        {"name": "Django", "img_path": 'django.jpeg'},
-        {"name": "Python", "img_path": 'python.jpeg'},
+        {"name": "Django", "img_path": 'django.png'},
+        {"name": "Python", "img_path": 'python.png'},
         {"name": "css", "img_path": 'css.png'},
         {"name": "Pandas", "img_path": 'pandas.png'},
         {"name": "Jupyter", "img_path": 'jupyter.png'},
@@ -54,66 +55,63 @@ if __name__ == '__main__':
         {"name": "MongoDB", "img_path": 'mongodb.png'},
         {"name": "Docker", "img_path": 'docker.png'},
     ]
-    proj_icons = [f'P{i}.png'for i in range(1,8)]
-    
-    n = len(tag_data)
-    django_tags = []
-    
-    for i in range(n):
-        desc_short = fake.text(max_nb_chars=200)
-        desc_long = fake.text(max_nb_chars=randint(300, 800))
-        created_date: datetime = fake.date_this_year() # type: ignore
-        
-        tag = Tags(
-                name=tag_data[i]['name'],
-                desc_short=desc_short,
-                desc_long=desc_long,
-                created_at=created_date,
-                updated_at='',
-            )
+    # Assuming you have 50 project icons in the media/images_for_injection directory
+    proj_images = [f'free_img_{i}.jpg' for i in range(50)] 
 
-        # Abre o arquivo de imagem e associa
-        
-        img_path = str(IMG_PATHS / tag_data[i]["img_path"])
-        with open(img_path, 'rb') as f:
-            tag.img_icon.save(tag_data[i]["img_path"], File(f), save=False)  
+    # Create tags
+    print("Creating tags...")
+    for tag_info in tag_data:
+        short_desc = fake.text(max_nb_chars=200)
+        long_desc = fake.text(max_nb_chars=randint(300, 800))
+
+        tag = TagModel(
+            name=tag_info['name'],
+            short_desc=short_desc,
+            long_desc=long_desc,
+        )
         tag.save()
-        django_tags.append(tag)
-        
-    print('implementação das tags')
-    pprint(django_tags)
-    all_tags_list = list(Tags.objects.all())
-        
-    django_projects = []    
+
+    print("Tags created successfully.")
+    all_tags_list = list(TagModel.objects.all())
+
+    # Create projects
+    print("Creating projects...")
     for _ in range(NUMBER_OF_PROJECTS):
         name_project = " ".join(fake.words(nb=randint(1, 2))).title()
-        desc_short = fake.text(max_nb_chars=400)
-        desc_long = fake.text(max_nb_chars=randint(300, 1800))
-        n = randint(1, min(NUMBER_OF_T_IN_P, len(django_tags)))
-        selected_tags = sample(all_tags_list, n)
-        
-        created_date: datetime = fake.date_this_year() # type: ignore
-        project = Project(
-                name=name_project,
-                short_desc=desc_short,
-                long_desc=desc_long,
-                created_at=created_date,
-                updated_at='',
-            )
-        # Abre o arquivo de imagem e associa
-        r_file_name = choice(proj_icons)
-        img_path = str(IMG_PATHS / r_file_name)
-        with open(img_path, 'rb') as f:
-            project.img_icon.save(r_file_name, File(f), save=False)
+        short_desc = fake.text(max_nb_chars=400)
+        long_desc = fake.text(max_nb_chars=randint(300, 1800))
+        n_tags = randint(1, min(NUMBER_OF_T_IN_P, len(all_tags_list)))
+        selected_tags = sample(all_tags_list, n_tags)
+
+        project = ProjectModel(
+            name=name_project,
+            short_desc=short_desc,
+            long_desc=long_desc,
+        )
         project.save()
+        # Assign random tags to the project
         project.tags.set(selected_tags)
-        django_projects.append(project)
         
-    print('implementação dos projetos')
-    pprint(django_projects)
+    print("Projects created successfully.")
     
-    end = datetime.now()
-    delta = end - start
-    print(f'Tempo total: {delta.total_seconds():.3f}s' )
-    print(f'Total tags: {len(django_tags)} --- Total Projects: {len(django_projects)}' )
-    print('--------------FIM--------------')
+    # Assign random icons to TagModel instances
+    print("Assigning icons to tags...")
+    for tag, tag_info in zip(TagModel.objects.all(), tag_data):
+        img_path = IMG_PATHS / tag_info['img_path']
+        if img_path.exists():
+            with open(img_path, 'rb') as img_file:
+                tag.img_icon = File(img_file, name=img_path.name) # type: ignore
+                tag.save()
+    print("Icons assigned to tags successfully.")
+    # Assign random images to ProjectModel instances
+    print("Assigning images to projects...")
+    for project in ProjectModel.objects.all():
+        img_path = IMG_PATHS / choice(proj_images)
+        if img_path.exists():
+            with open(img_path, 'rb') as img_file:
+                project.img_icon = File(img_file, name=img_path.name)# type: ignore
+                project.save()
+    
+    print("Images assigned to projects successfully.")
+    
+    print("Data injection completed successfully.")

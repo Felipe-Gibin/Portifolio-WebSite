@@ -11,7 +11,7 @@ class ProjectModel(models.Model):
     short_desc = models.TextField(max_length=400)
     long_desc= models.TextField(null=True, blank=True)
     img_icon = models.ImageField(upload_to=consts.MEDIA_PROJECT.name, null=True, blank=True)
-    tags = models.ManyToManyField('Tags', default='', blank=True)
+    tags = models.ManyToManyField('TagModel', default='', blank=True)
     visibility = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)

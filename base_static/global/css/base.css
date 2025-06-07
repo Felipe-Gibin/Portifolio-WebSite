@@ -1,17 +1,19 @@
-/* Correçção das margens */
+/* Base CSS for the application */
+
+/* Margin and padding reset */
 html, body, header, footer, main, div, h1, h2, h3, h4, h5, h6, p, a, ul, li {
     margin: 0;
     padding: 0;
 }
 
-/* Definição do tamanho da fonte */
+/* base font size and color */
 html {
     font-size: 62.5%;
     color: var(--text-primary);
     background-color: var(--background);
 }
 
-/* Corpo Principal */
+/* body styles */
 body {
     display: flex;
     flex-direction: column;
@@ -22,7 +24,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Corpo do conteúdo */
+/* main container */
 main {
     display: flex;
     flex-direction: column;

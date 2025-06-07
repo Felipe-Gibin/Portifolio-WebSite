@@ -1,4 +1,6 @@
-/* Container principal */
+/* Global syles for the email table page */
+
+/* Main container */
 .container {
     display: flex;
     flex-direction: column;
@@ -8,7 +10,7 @@
     color: inherit;
 }
 
-/* Container titulo */
+/* Title container */
 .container-title form{
     display: flex;
     flex-direction: column;
@@ -36,7 +38,7 @@
     transform: scale(1.02);
 }
 
-/* Tabela */
+/* Table container */
 .register-table-div {
     display: flex;
     flex-direction: column;
@@ -61,13 +63,11 @@
     color: var(--text-inverted);
 }
 
-/* Tabela - cabeçalho */
 .register-table th{
     background-color: var(--secondary-color);
     font-size: var(--bigger-font);
 }
 
-/* Tabela - registros */
 .register-table tr{
     font-size: var(--medium-font);
 }
@@ -81,8 +81,6 @@
     background-color: var(--tertiary-color);
 }
 
-
-/* Tabela - registros */
 .register-table td {
     border-bottom: 1px solid var(--gray);
     height: 40px;
@@ -90,7 +88,6 @@
     padding: 8px;
 }
 
-/* Tabela - cabeçalho */
 .register-table th {
     border-bottom: 1px solid var(--gray);
     height: 20px;
@@ -98,7 +95,6 @@
     padding: 8px;
 }
 
-/* Tabela - links */
 .register-table thead a {
     text-decoration: none;
     color: inherit;
@@ -112,8 +108,6 @@
     color: inherit;
 }
 
-
-/* Tabela - definir larguras */
 .register-table .col-id {
     width: 5%;
 }
@@ -124,6 +118,7 @@
     width: 20%;
 }
 
+/* Styles for the checkbox in the email send column */
 .col-email-send input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
@@ -136,7 +131,6 @@
     position: relative;
     transition: background-color 0.2s ease, border 0.2s ease;
 }
-
 .col-email-send input[type="checkbox"]:checked {
     background-color: var(--secondary-color);
     border-color: var(--border-highlight);

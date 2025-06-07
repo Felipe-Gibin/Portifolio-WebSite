@@ -1,3 +1,5 @@
+/* Header styles for the application */
+
 header {
     display: flex;
     flex-direction: row;
@@ -7,7 +9,7 @@ header {
     width: 100%;
 }
 
-/* Navegação cabeçalho */
+/* Header nav style */
 .header-nav {
     margin: 10px;
     padding: 10px;
@@ -16,19 +18,18 @@ header {
     font-weight: bold;
 }
 
-/* Link's cabeçalho */
+/* Header nav links */
 .header-nav a {
     text-decoration: none;
     color: inherit;
     padding: 10px;
     border-radius: 10px;
 }
-
-/* Link's cabeçalho ao passar o mouse*/
 .header-nav a:hover {
     background-color: var(--dark-primary-color);
 }
 
+/* Logout button placement */
 .logout {
     position: absolute;
     right: 10px;

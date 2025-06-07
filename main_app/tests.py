@@ -19,6 +19,7 @@ class SendEmailFormTest(TestCase):
         form = SendEmailForm(data=self.valid_data)
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data['phone'], '055011912345678')
+       
 
     def test_form_invalid_phone_too_short(self):
         data = self.valid_data.copy()
@@ -47,6 +48,7 @@ class SendEmailFormTest(TestCase):
         form = SendEmailForm(data=data)
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data['message'], 'Hello alert(1)')
+        assert form.is_valid(), form.errors
 
     def test_clean_phone_empty_returns_none(self):
         data = self.valid_data.copy()
@@ -54,6 +56,7 @@ class SendEmailFormTest(TestCase):
         form = SendEmailForm(data=data)
         self.assertTrue(form.is_valid())
         self.assertIsNone(form.cleaned_data['phone'])
+        assert form.is_valid(), form.errors
 
     def test_captcha_required(self):
         data = self.valid_data.copy()

@@ -1,4 +1,6 @@
-/* Container principal dos cards de projetos */
+/* Project card file for displaying project cards in a flex layout */
+
+/* Main container for the project cards */
 .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -8,6 +10,7 @@
     font-size: var(--bigger-font);
 }
 
+/* List of cards */
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -15,7 +18,7 @@
     gap: 30px;
 }
 
-/* Container 'fake' dos cards de projetos, para ter a seleção */
+/* Fake link to make the card redirect to the project detail page */
 .card-link {
     display: flex;
     flex-direction: column;
@@ -23,6 +26,7 @@
     color: var(--text-secondary);
 }
 
+/* The card itself */
 .card {
     display: flex;
     width: 350px;
@@ -36,23 +40,25 @@
     background-color: var(--background-inner);
 
 }
-
 .card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-elevated);
 }
 
+/* Main image of the card */
 .card-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
 
+/* Content of the card */
 .card-content {
     padding: 0 15px;
     flex: 1 1 auto;
 }
 
+/* Title of the card */
 .card-title {
     margin-top: 0.5rem;
     margin-bottom: 0.8rem;
@@ -60,12 +66,14 @@
     letter-spacing: 2px;
 }
 
+/* Description of the card */
 .card-content p {
     font-size: var(--medium-font);
     color: var(--text-primary);
     padding-bottom: 10px;
 }
 
+/* Tags section of the card */
 .tag-images {
     display: flex;
     justify-content: center;
@@ -82,6 +90,7 @@
     background-size: 80% 2px;
 }
 
+/* Individual tag icon */
 .tag-icon {
     width: 36px;
     height: 36px;

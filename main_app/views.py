@@ -17,7 +17,7 @@ class MainHomeView(ListView):
     # Customizing the queryset to filter projects that are visible and featured
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = queryset.filter(visibility=True, featured=True)
+        queryset = queryset.filter(visibility=True, featured=True).order_by('-id')[:3]
         return queryset
     
     # Customizing the context data to include additional information

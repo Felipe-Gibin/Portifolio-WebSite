@@ -63,10 +63,8 @@ CAPTCHA_IMAGE_SIZE = (280, 80) # Width, Height
 CAPTCHA_NOISE_FUNCTIONS = (
     'captcha.helpers.noise_arcs',
     'captcha.helpers.noise_dots',
-    'captcha.helpers.noise_spots',
 )
 CAPTCHA_FONT_SIZE = 48
-
 
 # NOTE = Set to True for testing purposes, but should be False in production
 CAPTCHA_TEST_MODE = False
@@ -191,8 +189,8 @@ USE_TZ = config('USE_TZ', cast=bool)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 # Configure static and media files urls and directories
-STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
     BASE_DIR / 'base_static',

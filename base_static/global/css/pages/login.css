@@ -1,3 +1,6 @@
+/* Global styles for the login page */
+
+/* Main container */
 .login-wraper {
     flex: 1;
     display: flex;
@@ -24,7 +27,9 @@
     box-shadow: var(--shadow-default);
     background-color: var(--background-inner-secondary);
 }
-
+.container-login h1 {
+    font-size: var(--biggest-font);
+}
 .container-login:hover {
     outline: none;
     border-color: var(--border-highlight);
@@ -41,11 +46,6 @@
     padding: 8px;
     width: 60%;
 }
-
-.container-login h1 {
-    font-size: var(--biggest-font);
-}
-
 
 .form-group {
     display: flex;
@@ -94,8 +94,7 @@
     scale: 1.02;
 }
 
-
-
+/* Styles for the error message */
 .error {
     display: flex;
     width: 15%;
