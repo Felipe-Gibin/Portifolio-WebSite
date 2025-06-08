@@ -1,12 +1,6 @@
 #!/bin/sh
 cd "$(dirname "$0")/.."
 
-source venv/Scripts/activate
-
-python manage.py runserver 0.0.0.0:8000 &
-SERVER_PID=$!
-sleep  6
-
 echo "Running tests for all forms..."
 echo ""
 echo ""
@@ -60,5 +54,4 @@ echo ""
 echo ""
 echo ""
 
-kill $SERVER_PID
 read -p "Pressione Enter para continuar..."

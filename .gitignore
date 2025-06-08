@@ -4,6 +4,7 @@ pensamentos/
 .vscode/
 .DS_Store
 Thumbs.db
+db_data/
 
 # ASP.NET / MAUI.NET
 bin/
@@ -79,6 +80,7 @@ migrations/**/pycache/
 *.sql
 *.sql.gz
 *.sql.bak
+db_data/
 
 # Sensitive data
 *.env

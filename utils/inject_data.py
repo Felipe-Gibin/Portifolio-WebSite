@@ -20,12 +20,12 @@ NUMBER_OF_TAGS = 15
 NUMBER_OF_T_IN_P = 7
 
 # NOTE: Set to True if you want to inject images into the projects and tags
-WITH_IMG = False
+WITH_IMG = True
 
 # Define the path to the images for injection
 # Assuming the images are stored in a directory named 'images_for_injection' inside the 'media' directory
 
-if WITH_IMG::
+if WITH_IMG:
     IMG_PATHS = DJANGO_BASE_DIR / 'media' / 'images_for_injection'
 
 settings.USE_TZ = False
@@ -106,6 +106,8 @@ if __name__ == '__main__':
         print("Assigning icons to tags...")
         for tag, tag_info in zip(TagModel.objects.all(), tag_data):
             img_path = IMG_PATHS / tag_info['img_path']
+            print(f"Assigning icon {img_path} to tag {tag.name}")
+            # Check if the image file exists before assigning
             if img_path.exists():
                 with open(img_path, 'rb') as img_file:
                     tag.img_icon = File(img_file, name=img_path.name) # type: ignore
@@ -115,6 +117,8 @@ if __name__ == '__main__':
         print("Assigning images to projects...")
         for project in ProjectModel.objects.all():
             img_path = IMG_PATHS / choice(proj_images)
+            print(f"Assigning image {img_path} to project {project.name}")
+            # Check if the image file exists before assigning
             if img_path.exists():
                 with open(img_path, 'rb') as img_file:
                     project.img_icon = File(img_file, name=img_path.name)# type: ignore

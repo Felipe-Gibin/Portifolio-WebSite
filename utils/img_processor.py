@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import BinaryIO
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
+from PIL.Image import DecompressionBombError
 from pathlib import Path
 from io import BytesIO
 from django.core.files.base import ContentFile
@@ -10,9 +11,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 import io
 
 # Function to generate a new image name based on the provided name
-def new_image_name(name: str) -> str:
-    new_name = name.replace(" ", "_")
-    new_name += ".png"
+def new_image_name(name: str, ext: str = ".png") -> str:
+    new_name = name.replace(" ", "_") + ext
     
     project_path = consts.MEDIA_PROJECT / new_name
     tag_path = consts.MEDIA_TAG / new_name
@@ -40,24 +40,58 @@ def unique_name(path: Path) -> str:
     return new_path.name
 
 # Function to resize an image to 1000x1000 pixels
-# FIXME: this function should be more flexible, allowing different sizes
-def resize_image(image_obj: Image.Image) -> Image.Image:
-    img = image_obj.resize((1000, 1000))
+def resize_image(image_obj: Image.Image, max_side: int = 800) -> Image.Image:
+    original_size = image_obj.size
+    img = image_obj.copy()
+    width, height = img.size
+    if width > height:
+        new_width = max_side
+        new_height = int((max_side / width) * height)
+    else:
+        new_height = max_side
+        new_width = int((max_side / height) * width)
+        
+    img = img.resize((new_width, new_height), Image.LANCZOS)
+    
     return img
     
 # Function to process an image file, resizing it and returning a ContentFile
-def process_img(image_obj: File , name: str) -> ContentFile:
-    img = Image.open(image_obj)
+def process_img(image_obj: File , name: str, max_side: int = 800) -> ContentFile | None:
     
-    resize_image(img)
-    
-    # Save the resized image to a BytesIO buffer
-    buffer = BytesIO()
-    img.save(buffer, format='PNG')
-    buffer.seek(0)
+    try:
+        img = Image.open(image_obj)
+        img_format = img.format
+        img = resize_image(img, max_side=max_side)
+        # Save the resized image to a BytesIO buffer
+        buffer = BytesIO()
+        
+        # Determine the image format and save accordingly
+        if img_format == 'PNG':
+            img.save(buffer, format='PNG', optimize=True, compress_level=9)
+            ext = '.png'
+        elif img_format in ['JPEG', 'JPG']:
+            img = img.convert("RGB")
+            img.save(buffer, format='JPEG', quality=85, optimize=True)
+            ext = '.jpg'
+        else:
+            # fallback to PNG if format is not recognized
+            img.save(buffer, format='PNG', optimize=True, compress_level=9)
+            ext = '.png'
+        buffer.seek(0)
 
-    # Create a new ContentFile with the resized image
-    return ContentFile(buffer.read(), name=new_image_name(name))
+        # Create a new ContentFile with the resized image
+        return ContentFile(buffer.read(), name=new_image_name(name, ext))
+    except DecompressionBombError as e:
+        # Handle the case where the image is too large
+        print(f"[FLAG] Image processing error: {name} - {e}")
+    except UnidentifiedImageError as e:
+        # Handle the case where the image cannot be identified
+        print(f"[FLAG] Unidentified image error: {name} - {e}")
+    except Exception as e:
+        # Handle any other exceptions that may occur
+        print(f"[FLAG] Unexpected error processing image {name}: {e}")
+    return None
+        
 
 # Function to generate a test image for testing purposes
 def generate_test_image():

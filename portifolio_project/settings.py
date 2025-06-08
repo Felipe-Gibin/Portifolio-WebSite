@@ -129,8 +129,12 @@ WSGI_APPLICATION = 'portifolio_project.wsgi.application'
 # FIXME: Change the database settings to use PostgreSQL
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config("MYSQL_DATABASE"),
+        'USER': config("MYSQL_USER"),
+        'PASSWORD': config("MYSQL_PASSWORD"),
+        'HOST': 'db',
+        'PORT': config("MYSQL_PORT", 3306),
     }
 }
 

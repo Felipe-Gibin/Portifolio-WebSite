@@ -1,0 +1,13 @@
+# Commands for docker-compose
+
+# Build Docker Image
+docker-compse build
+
+# Run one command inside an docker service
+docker-compose run --rm {$service_name} {$command}
+
+example : docker-compose run app django-admin startproject core .
+
+# Open bash terminal of the container
+docker exec -it {$container_name} /bin/bash
+
